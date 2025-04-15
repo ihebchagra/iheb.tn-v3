@@ -1,7 +1,6 @@
 server:
 	@echo "Starting PHP development server..."
 	php -S localhost:6969 -t public 2>&1 | grep -E -v "\[200\]|Accepted|Closing"
-	# php -S localhost:5656 -t public 2>&1 | grep --color=always -E -v "Accepted|Closing"
 
 sw:
 	@echo "Generating Service Worker..."
@@ -9,7 +8,7 @@ sw:
 	bunx workbox generateSW workbox-config.js
 
 bump:
-	@./version-bump.sh
+	@./bump.sh
 
 upload:
 	@echo "Uploading to testing..."

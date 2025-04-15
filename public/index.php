@@ -1,25 +1,35 @@
 <?php
-require_once __DIR__ . '/../routes.php';
+require_once __DIR__ . '/../router.php';
+global $route;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($route) {
         case 'analytics':
             require_once $_SERVER['DOCUMENT_ROOT'] . "/../api/$route.php";
             exit;
-        break;
+            break;
         default:
             header('Location: /');
             exit;
-        break;
+            break;
+    }
 }
 
 ob_start();
 require_once __DIR__ . "/../routes/$route.php";
 $content = ob_get_clean();
 
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+ob_start();
+require_once __DIR__ . "/../components/headerjs.php";
+$headerjs = ob_get_clean();
+
+ob_start();
+require_once __DIR__ . "/../components/bottomjs.php";
+$bottomjs = ob_get_clean();
+
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,18 +42,19 @@ header("Pragma: no-cache");
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link rel="stylesheet" href="/index.css?v=429">
+    <!-- External Deps -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis&family=Dosis:wght@700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="manifest" href="/manifest.json?v=16">
     <link rel="shortcut icon" href="/assets/img/icons/favicon.ico?v=1" type="image/x-icon">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@marcreichel/alpine-autosize@latest/dist/alpine-autosize.min.js" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script type="module" src="/assets/js/header.js?v=12"></script>
+    <!-- Local Deps -->
+    <link rel="stylesheet" href="/styles.css?v=810">
+    <?= $headerjs ?>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -57,26 +68,24 @@ header("Pragma: no-cache");
 </head>
 
 <body>
-    <p-loading shadow></p-loading>
-    <p-go-back shadow></p-go-back>
-    <p-drawer shadow></p-drawer>
-    <p-install-banner shadow></p-install-banner>
+    <div id="loading"></div>
+    <input x-data="{ 'darkmode' : $persist(false)}" x-model='darkmode' type="checkbox" id="dark-toggle" class="dark-toggle-checkbox">
     <div id="background"></div>
-    <?php
-    if ($_SERVER['HTTP_HOST'] !== 'promety.tn') {
-        ?>
-        <div id="dev-mode-banner">DEV MODE</div>
-    <?php
-    }
-?>
+    
+    <header>
+        <a class="logo" href="/">
+            iheb.tn
+        </a>
+        <label for="dark-toggle" class="dark-toggle">
+        </label>
+        
+    </header>
+    
     <main id="content">
-        <div id="role" style="display: none;" data-role=<?= '"' . $user_state . '"' ?>></div>
         <?= $content ?>
     </main>
-    <script src="/assets/js/index.js?v=322"></script>
-    <?php
-include_once __DIR__ . "/assets/js/javascript.php";
-?>
+    <footer>Made with ❤️ by Iheb Chagra</footer>
+    <?= $bottomjs ?>
 </body>
 
 </html>

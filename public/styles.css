@@ -1,0 +1,507 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+main {
+  display: block;
+}
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub {
+  bottom: -0.25em;
+}
+sup {
+  top: -0.5em;
+}
+img {
+  border-style: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+button,
+input {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  -webkit-appearance: button;
+}
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner,
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring,
+button:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+progress {
+  vertical-align: baseline;
+}
+textarea {
+  overflow: auto;
+}
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+details {
+  display: block;
+}
+summary {
+  display: list-item;
+}
+[hidden],
+template {
+  display: none;
+}
+
+/*! CC BY-SA 3.0 License | https://stackoverflow.com/a/36118384/1154965 */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== VARIABLES ===== */
+:root {
+  --bg_h: #f9f5d7;
+  --bg: #fbf1c7;
+  --bg_s: #f2e5bc;
+  --bg1: #ebdbb2;
+  --bg2: #d5c4a1;
+  --bg3: #bdae93;
+  --bg4: #a89984;
+
+  --fg: #282828;
+  --fg1: #3c3836;
+  --fg2: #504945;
+  --fg3: #665c54;
+  --fg4: #7c6f64;
+
+  --red: #9d0006;
+  --green: #79740e;
+  --yellow: #b57614;
+  --blue: #076678;
+  --purple: #8f3f71;
+  --aqua: #427b58;
+  --orange: #af3a03;
+  --gray: #928374;
+
+  --red-dim: #cc2412;
+  --green-dim: #98971a;
+  --yellow-dim: #d79921;
+  --blue-dim: #458598;
+  --purple-dim: #b16286;
+  --aqua-dim: #689d6a;
+  --orange-dim: #d65d0e;
+  --gray-dim: #7c6f64;
+}
+
+:root:has(#dark-toggle:checked) {
+  --bg_h: #1d2021;
+  --bg: #282828;
+  --bg_s: #32302f;
+  --bg1: #3c3836;
+  --bg2: #504945;
+  --bg3: #665c54;
+  --bg4: #7c6f64;
+
+  --fg: #fbf1c7;
+  --fg1: #ebdbb2;
+  --fg2: #d5c4a1;
+  --fg3: #bdae93;
+  --fg4: #a89984;
+
+  --red: #fb4934;
+  --green: #b8bb26;
+  --yellow: #fabd2f;
+  --blue: #83a598;
+  --purple: #d3869b;
+  --aqua: #8ec07c;
+  --gray: #928374;
+  --orange: #fe8019;
+
+  --red-dim: #cc2412;
+  --green-dim: #98971a;
+  --yellow-dim: #d79921;
+  --blue-dim: #458588;
+  --purple-dim: #b16286;
+  --aqua-dim: #689d6a;
+  --gray-dim: #a89984;
+  --orange-dim: #d65d0e;
+}
+
+body {
+  font-family:
+    "Alegreya", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+#content {
+  color: var(--fg);
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+::selection,
+::-moz-selection {
+  background-color: var(--purple);
+  color: var(--bg);
+  text-decoration-color: var(--bg);
+}
+
+h1 {
+  color: var(--blue);
+  padding: 0px;
+  margin: 0px;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 2rem;
+  list-style-type: disc;
+}
+
+li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+li::marker {
+  color: var(--orange);
+}
+
+h2 {
+  color: var(--green);
+  padding: 0px;
+  margin: 0px;
+}
+h3 {
+  color: var(--red);
+  padding: 0px;
+  margin: 0px;
+}
+
+p {
+  padding: 0px;
+  margin: 0px;
+}
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+* {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Light theme gradient (visible by default) */
+#background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #f9f5d7,
+    #fbf1c7,
+    #f2e5bc,
+    #ebdbb2,
+    #d5c4a1,
+    #bdae93,
+    #a89984
+  );
+  opacity: 1;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme gradient (hidden by default) */
+#background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #1d2021,
+    #282828,
+    #32302f,
+    #3c3836,
+    #504945,
+    #665c54,
+    #7c6f64
+  );
+  opacity: 0;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Toggle visibility when dark mode is active */
+:root:has(#dark-toggle:checked) #background::before {
+  opacity: 0;
+}
+
+:root:has(#dark-toggle:checked) #background::after {
+  opacity: 1;
+}
+
+/* dev mode banner ribbon on the top right side */
+#dev-mode-banner {
+  position: fixed;
+  top: 8rem;
+  right: 0;
+  padding: 0.5rem 6rem;
+  background-color: var(--red);
+  font-weight: bold;
+  font-size: 1rem;
+  transform: rotate(45deg) translateY(1rem) translateX(4rem);
+  transform-origin: top right;
+  z-index: 20;
+  /* shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  color: white !important;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  z-index: 30;
+  position: fixed;
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Light theme gradient for header (visible by default) */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #d5c4a1, #bdae93);
+  opacity: 1;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme gradient for header (hidden by default) */
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #504945, #665c54);
+  opacity: 0;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Toggle header background when dark mode is active */
+:root:has(#dark-toggle:checked) header::before {
+  opacity: 0;
+}
+
+:root:has(#dark-toggle:checked) header::after {
+  opacity: 1;
+}
+
+header > a.logo {
+  text-decoration-line: none;
+  color: var(--fg);
+  font-weight: 700;
+  margin-left: 1rem;
+  margin-right: auto;
+  user-select: none;
+}
+
+header > .dark-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-right: 3rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+/* Light theme icon (visible by default) */
+.dark-toggle::before {
+  content: "🌝";
+  position: absolute;
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+/* Dark theme icon (hidden by default) */
+.dark-toggle::after {
+  content: "🌚";
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Toggle icon visibility when dark mode is active */
+:root:has(#dark-toggle:checked) .dark-toggle::before {
+  opacity: 0;
+}
+
+:root:has(#dark-toggle:checked) .dark-toggle::after {
+  opacity: 1;
+}
+
+.dark-toggle:hover {
+  transform: rotate(10deg);
+}
+
+:root:has(#dark-toggle:checked) .dark-toggle:hover {
+  transform: rotate(-10deg);
+}
+
+.dark-toggle-checkbox {
+  display: none;
+}
+
+/* --- Burger Menu Icon --- */
+.burger {
+  color: var(--fg);
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.15s ease;
+}
+
+.burger:hover {
+  color: var(--purple);
+}
+
+footer {
+  color: var(--fg1);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+  margin-top: auto;
+  padding-top: 2rem;
+  margin-bottom: 1rem;
+}
