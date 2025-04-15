@@ -2,10 +2,7 @@ const revision = String(new Date().getTime());
 module.exports = {
   globDirectory: "public/",
   globPatterns: ["**/*.{woff,svg,webp,html,css,js}"],
-  globIgnores: [
-    "assets/pdf/**",
-    "static/**",
-  ],
+  globIgnores: ["assets/pdf/**", "static/**"],
   swDest: "public/sw.js",
   ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
   skipWaiting: true,
@@ -59,10 +56,7 @@ module.exports = {
     // NetworkFirst for login, register, and profile routes
     {
       urlPattern: ({ url }) => {
-        return [
-          "/", // sadly this is needed so when we first login the user gets the home page. otherwise there is a risk the user gets redirected
-          "/statistiques",
-        ].includes(url.pathname);
+        return ["/statistiques"].includes(url.pathname);
       },
       handler: "NetworkFirst",
       options: {

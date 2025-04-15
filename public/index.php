@@ -46,19 +46,20 @@ header('Pragma: no-cache');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="manifest" href="/manifest.json?v=16">
-    <link rel="shortcut icon" href="/assets/img/icons/favicon.ico?v=1" type="image/x-icon">
+    <link rel="manifest" href="/assets/pwa/site.webmanifest?v=17">
+    <link rel="shortcut icon" href="/assets/pwa/favicon.ico?v=3" type="image/x-icon">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Local Deps -->
-    <link rel="stylesheet" href="/styles.css?v=810">
+    <link rel="stylesheet" href="/styles.css?v=821">
+    <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js?v=74')
+                navigator.serviceWorker.register('/sw.js?v=75')
                     .then((registration) => {})
                     .catch((registrationError) => {});
             });
@@ -73,13 +74,13 @@ header('Pragma: no-cache');
     <div id="background"></div>
     
     <header>
-        <a class="logo" href="/">
+        <a class="logo" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-select="#content">
             iheb.tn
         </a>
         <label for="dark-toggle" class="dark-toggle">
         </label>
-        
     </header>
+    <div id="progress"></div>
     
     <main id="content">
         <?= $content ?>

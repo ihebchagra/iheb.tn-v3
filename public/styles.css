@@ -193,6 +193,9 @@ template {
   --aqua-dim: #689d6a;
   --orange-dim: #d65d0e;
   --gray-dim: #7c6f64;
+
+  --progress-width: 0%;
+  --progress-opacity: 0%;
 }
 
 :root:has(#dark-toggle:checked) {
@@ -504,4 +507,16 @@ footer {
   margin-top: auto;
   padding-top: 2rem;
   margin-bottom: 1rem;
+}
+
+#progress {
+  width: var(--progress-width);
+  opacity: var(--progress-opacity);
+  background: var(--orange);
+  height: 2px;
+  position: fixed;
+  top: 3rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
