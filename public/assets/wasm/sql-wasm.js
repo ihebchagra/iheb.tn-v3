@@ -10,7 +10,6 @@
 // However, that function might be called multiple times, and on subsequent calls, we don't actually want it to instantiate a new instance of the Module
 // Instead, we want to return the previously loaded module
 
-// TODO: Make this not declare a global if used in the browser
 var initSqlJsPromise = undefined;
 
 var initSqlJs = function (moduleConfig) {

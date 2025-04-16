@@ -56,6 +56,7 @@ header('Pragma: no-cache');
     <link rel="stylesheet" href="/styles.css?v=821">
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
+    <!-- TODO: Implement google analytics -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

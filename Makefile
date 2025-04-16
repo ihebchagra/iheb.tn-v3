@@ -20,7 +20,7 @@ commit:
 
 dev:
 	@echo "Starting development environment..."
-	@$(MAKE) bump &
-	@$(MAKE) server
+	@$(MAKE) server &
+	@$(MAKE) bump
 
 .PHONY: server sw bump upload commit

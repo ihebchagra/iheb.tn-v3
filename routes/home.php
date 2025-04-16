@@ -22,7 +22,7 @@
 <p>Un Calculateur de probabilité des résultats des tests API.</p>
 <h3>🩸 <a hx-get="/prelevements" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Guide de Prélèvements</a></h3>
 <p>Savoir la méthode de prélèvement, la quantité du prélèvement et le prix rapidement.</p>
-<h3>🚑 <a hx-get="/premiersecours" hx-target="#content" hx-swap="outerHTML" hx-select="#content">premiersecours.tn</a></h3>
+<h3>🚑 <a hx-get="https://premiersecours.tn" hx-target="#content" hx-swap="outerHTML" hx-select="#content">premiersecours.tn</a></h3>
 <p>Un site complémentaire aux formations du Programme national de formation aux premiers secours en milieu scolaire.Direction par <b>Dr Mylène Ben Hamida</b> et Design du site par <b>Dr Mohamed Aziz Berriche</b>.</p>
 <h3>🎓 <a href="https://ecn.iheb.tn/">ECN tools</a> <span class='deprecated'>(N'est plus maintenu)</span></h3>
 <p> Polysearch ECN, Sériesearch et ECN 3al tayer. Des outils pour la préparation à l'épreuve de résidanat. <b>Dernière mise à jour mars 2024</b>.</p>
