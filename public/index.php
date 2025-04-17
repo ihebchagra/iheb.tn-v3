@@ -53,7 +53,7 @@ header('Pragma: no-cache');
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Local Deps -->
-    <link rel="stylesheet" href="/styles.css?v=821">
+    <link rel="stylesheet" href="/styles.css?v=831">
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
     <!-- TODO: Implement google analytics -->

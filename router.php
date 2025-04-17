@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// TODO : donate page that is not necessarily accessible, backwards compat
 $get_routes = ['home', 'ecn', 'ecn/polysearch', 'ecn/seriesearch', 'ecn/ecn3altayer', 'medicasearch', 'donate'];
 $post_routes = ['analytics'];
 

@@ -223,4 +223,60 @@ window.addEventListener("popstate", function (e) {
       select: "#content",
     })
 });
+
+
+// init typewriter for home page 
+function typewriter() {
+    return {
+        jobs: [
+            "Médecin résident en microbiologie",
+            "Programmeur du dimanche",
+            "Responsable web/app @ AMENA",
+        ],
+        displayText: '',
+        currentJob: 0,
+        charIndex: 0,
+        isDeleting: false,
+        typeDelay: 100,
+        deleteDelay: 50,
+        pauseDelay: 1500,
+
+        init() {
+            this.typeNextChar();
+        },
+
+        typeNextChar() {
+            const currentText = this.jobs[this.currentJob];
+
+            if (!this.isDeleting) {
+                // Typing
+                this.displayText = currentText.substring(0, this.charIndex + 1);
+                this.charIndex++;
+
+                // If completed typing
+                if (this.charIndex >= currentText.length) {
+                    this.isDeleting = false;
+                    // Wait before starting to delete
+                    setTimeout(() => {
+                        this.isDeleting = true;
+                        this.typeNextChar();
+                    }, this.pauseDelay);
+                    return;
+                }
+            } else {
+                // Deleting
+                this.displayText = currentText.substring(0, this.charIndex - 1);
+                this.charIndex--;
+
+                // If completed deleting
+                if (this.charIndex <= 0) {
+                    this.isDeleting = false;
+                    this.currentJob = (this.currentJob + 1) % this.jobs.length;
+                }
+            }
+            const delay = this.isDeleting ? this.deleteDelay : this.typeDelay;
+            setTimeout(() => this.typeNextChar(), delay);
+        }
+    }
+}
 </script>
