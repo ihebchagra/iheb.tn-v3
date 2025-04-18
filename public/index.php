@@ -58,11 +58,12 @@ header('Pragma: no-cache');
     <?= $headerjs ?>
     <!-- TODO: Implement google analytics -->
     <!-- TODO: install diaglog and button -->
-    <!-- TODO: add fmt news -->
+    <!-- TODO: add fmt and other news -->
+    <!-- TODO: add links filter -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js?v=76')
+                navigator.serviceWorker.register('/sw.js?v=77')
                     .then((registration) => {})
                     .catch((registrationError) => {});
             });

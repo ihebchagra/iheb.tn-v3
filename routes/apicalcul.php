@@ -114,7 +114,27 @@
                 {
                     key: 'api20ne',
                     label: 'API 20NE'
-                }
+                },
+                {
+                    key: 'apistrep',
+                    label: 'API Strep'
+                },
+                {
+                    key: 'apicoryne',
+                    label: 'API Coryne'
+                },
+                {
+                    key: 'apinh',
+                    label: 'API NH'
+                },
+                {
+                    key: 'apistaph',
+                    label: 'API Staph'
+                },
+                {
+                    key: 'id32c',
+                    label: 'ID32 C'
+                },
             ],
             selectedDb: 'api10s',
             dbLoading: false,
@@ -146,8 +166,13 @@
                 this.profile = {};
                 let url = '';
                 if (key === 'api10s') url = '/assets/db/api10s.json';
-                else if (key === 'api20e') url = '/assets/db/api20e.json?v=2';
-                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=3';
+                else if (key === 'api20e') url = '/assets/db/api20e.json?v=7';
+                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=6';
+                else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=9';
+                else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=10';
+                else if (key === 'apinh') url = '/assets/db/apinh.json?v=11';
+                else if (key === 'apistaph') url = '/assets/db/apistaph.json?v=9';
+                else if (key === 'id32c') url = '/assets/db/id32c.json?v=8';
                 else {
                     this.dbError = 'Base inconnue.';
                     this.dbLoading = false;
@@ -178,6 +203,16 @@
                         this.dbError = "API 20E : Bientôt disponible.";
                     } else if (key === 'api20ne'){
                         this.dbError = "API 20NE : Bientôt disponible.";
+                    } else if (key === 'apistrep'){
+                        this.dbError = "API Strep : Bientôt disponible.";
+                    } else if (key === 'apicoryne'){
+                        this.dbError = "API Coryne : Bientôt disponible.";
+                    } else if (key === 'apinh'){
+                        this.dbError = "API NH : Bientôt disponible.";
+                    } else if (key === 'apistaph'){
+                        this.dbError = "API Staph : Bientôt disponible.";
+                    } else if (key === 'id32c'){
+                        this.dbError = "ID32 C  : Bientôt disponible.";
                     } else {
                         this.dbError = "Erreur de chargement de la base.";
                     }
@@ -271,7 +306,8 @@
     }
 
     h2 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--orange)
     }
 
     .apicalcul-container {
@@ -284,6 +320,7 @@
 
     .apicalcul-db-select {
         display: flex;
+        flex-wrap: wrap;
         gap: 0.5rem;
         align-items: center;
         justify-content: center;
@@ -304,12 +341,12 @@
     }
 
     .apicalcul-db-select button.active {
-        background: var(--blue);
+        background: var(--green);
         color: var(--bg);
     }
 
     .apicalcul-db-select button:not(.active):hover {
-        background: var(--blue-dim);
+        background: var(--green-dim);
         color: var(--bg);
     }
 
@@ -418,8 +455,13 @@
     }
 
     .toggle-group button.active.black {
-        background: var(--black);
+        background: var(--fg);
         color: var(--bg);
+    }
+
+    .toggle-group button.active.white {
+        background: var(--bg_h);
+        color: var(--fg);
     }
 
     .toggle-group button.active.orange {
@@ -458,7 +500,7 @@
     }
 
     .apicalcul-reset {
-        background: var(--orange);
+        background: var(--red);
     }
 
     .apicalcul-submit:hover {
@@ -466,11 +508,11 @@
     }
 
     .apicalcul-reset:hover {
-        background: var(--orange-dim);
+        background: var(--red-dim);
     }
 
     .apicalcul-results {
-        margin-top: 2rem;
+        margin-top: 1rem;
         background: var(--bg2);
         border-radius: 6px;
         padding: 1rem;
@@ -495,7 +537,7 @@
     }
 
     .results-table th {
-        color: var(--blue);
+        color: var(--purple);
         font-weight: bold;
         font-size: 1em;
         background: var(--bg3);
@@ -508,6 +550,8 @@
 
     .results-table tr {
         background: var(--bg2);
+        border-right: 1px solid var(--bg3);
+        border-left: 1px solid var(--bg3);
     }
 
     .incompatibilities {

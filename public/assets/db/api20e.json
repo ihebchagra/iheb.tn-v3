@@ -9,8 +9,8 @@
     {
       "key": "ADH",
       "label": "ADH",
-      "posClass": "yellow",
-      "negClass": "gray"
+      "posClass": "orange",
+      "negClass": "yellow"
     },
     {
       "key": "LDC",
@@ -33,7 +33,7 @@
     {
       "key": "H2S",
       "label": "H₂S",
-      "posClass": "gray",
+      "posClass": "black",
       "negClass": "gray"
     },
     {
@@ -46,7 +46,7 @@
       "key": "TDA",
       "label": "TDA",
       "posClass": "orange",
-      "negClass": "gray"
+      "negClass": "yellow"
     },
     {
       "key": "IND",
@@ -63,7 +63,7 @@
     {
       "key": "GEL",
       "label": "GEL",
-      "posClass": "gray",
+      "posClass": "black",
       "negClass": "gray"
     },
     {
@@ -104,7 +104,7 @@
     },
     {
       "key": "MEL",
-      "label": "Melibiose",
+      "label": "Mélibiose",
       "posClass": "yellow",
       "negClass": "blue"
     },

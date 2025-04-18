@@ -1,0 +1,273 @@
+{
+  "criteria": [
+    {
+      "key": "GLU",
+      "label": "Glucose",
+      "posClass": "yellow",
+      "negClass": "red"
+    },
+    {
+      "key": "FRU",
+      "label": "Fructose",
+      "posClass": "yellow",
+      "negClass": "red"
+    },
+    {
+      "key": "MAL",
+      "label": "Maltose",
+      "posClass": "yellow",
+      "negClass": "red"
+    },
+    {
+      "key": "SAC",
+      "label": "Saccharose",
+      "posClass": "yellow",
+      "negClass": "red"
+    },
+    {
+      "key": "ODC",
+      "label": "Ornithine Décarboxylase",
+      "posClass": "blue",
+      "negClass": "green"
+    },
+    {
+      "key": "URE",
+      "label": "Urée",
+      "posClass": "red",
+      "negClass": "yellow"
+    },
+    {
+      "key": "LIP",
+      "label": "Lipase",
+      "posClass": "blue",
+      "negClass": "gray"
+    },
+    {
+      "key": "PAL",
+      "label": "Phosphatase Alcaline",
+      "posClass": "yellow",
+      "negClass": "gray"
+    },
+    {
+      "key": "BGAL",
+      "label": "ß-Galactosidase",
+      "posClass": "yellow",
+      "negClass": "gray"
+    },
+    {
+      "key": "PRO",
+      "label": "Proline Arylamidase",
+      "posClass": "orange",
+      "negClass": "gray"
+    },
+    {
+      "key": "GGT",
+      "label": "γ-Glutamyl Transférase",
+      "posClass": "orange",
+      "negClass": "gray"
+    },
+    {
+      "key": "IND",
+      "label": "Indole",
+      "posClass": "red",
+      "negClass": "gray"
+    }
+  ],
+  "db": [
+    {
+      "Taxon": "Act.pleuropneumoniae",
+      "GLU": 100,
+      "FRU": 100,
+      "MAL": 100,
+      "SAC": 100,
+      "ODC": 0,
+      "URE": 100,
+      "LIP": 0,
+      "PAL": 100,
+      "BGAL": 100,
+      "PRO": 0,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Ag.aphrophilus",
+      "GLU": 100,
+      "FRU": 96,
+      "MAL": 99,
+      "SAC": 96,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 100,
+      "BGAL": 88,
+      "PRO": 0,
+      "GGT": 29,
+      "IND": 0
+    },
+    {
+      "Taxon": "Avi.paragallinarum",
+      "GLU": 100,
+      "FRU": 100,
+      "MAL": 0,
+      "SAC": 100,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 100,
+      "BGAL": 0,
+      "PRO": 0,
+      "GGT": 1,
+      "IND": 0
+    },
+    {
+      "Taxon": "H.influenzae",
+      "GLU": 100,
+      "FRU": 89,
+      "MAL": 12,
+      "SAC": 1,
+      "ODC": 40,
+      "URE": 92,
+      "LIP": 0,
+      "PAL": 100,
+      "BGAL": 0,
+      "PRO": 0,
+      "GGT": 5,
+      "IND": 74
+    },
+    {
+      "Taxon": "H.parainfluenzae",
+      "GLU": 100,
+      "FRU": 94,
+      "MAL": 94,
+      "SAC": 97,
+      "ODC": 73,
+      "URE": 55,
+      "LIP": 0,
+      "PAL": 97,
+      "BGAL": 30,
+      "PRO": 0,
+      "GGT": 5,
+      "IND": 11
+    },
+    {
+      "Taxon": "Histophilus somni",
+      "GLU": 100,
+      "FRU": 100,
+      "MAL": 0,
+      "SAC": 0,
+      "ODC": 100,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 0,
+      "GGT": 0,
+      "IND": 50
+    },
+    {
+      "Taxon": "M.(Bran.)catarrhalis",
+      "GLU": 1,
+      "FRU": 0,
+      "MAL": 0,
+      "SAC": 0,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 100,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 0,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neis.cinerea",
+      "GLU": 0,
+      "FRU": 0,
+      "MAL": 0,
+      "SAC": 0,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 95,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neis.gonorrhoeae",
+      "GLU": 97,
+      "FRU": 0,
+      "MAL": 0,
+      "SAC": 0,
+      "ODC": 0,
+      "URE": 1,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 99,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neis.lactamica",
+      "GLU": 100,
+      "FRU": 0,
+      "MAL": 100,
+      "SAC": 0,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 100,
+      "PRO": 100,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neis.meningitidis",
+      "GLU": 97,
+      "FRU": 0,
+      "MAL": 90,
+      "SAC": 0,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 44,
+      "GGT": 100,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neis.polysaccharea",
+      "GLU": 100,
+      "FRU": 0,
+      "MAL": 100,
+      "SAC": 75,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 0,
+      "PRO": 99,
+      "GGT": 0,
+      "IND": 0
+    },
+    {
+      "Taxon": "Neisseria spp",
+      "GLU": 100,
+      "FRU": 80,
+      "MAL": 86,
+      "SAC": 65,
+      "ODC": 0,
+      "URE": 0,
+      "LIP": 0,
+      "PAL": 0,
+      "BGAL": 1,
+      "PRO": 99,
+      "GGT": 7,
+      "IND": 0
+    }
+  ]
+}
