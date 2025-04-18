@@ -57,10 +57,12 @@ header('Pragma: no-cache');
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
     <!-- TODO: Implement google analytics -->
+    <!-- TODO: install diaglog and button -->
+    <!-- TODO: add fmt news -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js?v=75')
+                navigator.serviceWorker.register('/sw.js?v=76')
                     .then((registration) => {})
                     .catch((registrationError) => {});
             });

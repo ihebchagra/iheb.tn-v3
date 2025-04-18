@@ -287,9 +287,9 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
   return '<span class="title-main">' + Nom_Commercial + '</span><span class="title-main">' + Forme + Presentation + '</span>';
 }
 
-document.addEventListener('alpine:init', () => {
-  Alpine.data('medicamentSearchApp', () => ({
+  function medicamentSearchApp() {
     // --- State Variables ---
+    return {
     isLoading: true,
     loadingStatus: 'Initialisation...',
     loadingProgress: 0,
@@ -581,8 +581,8 @@ document.addEventListener('alpine:init', () => {
         this.searchError = null;
       }
     }
-  }));
-});
+  };
+};
 </script>
 
 <style>

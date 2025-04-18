@@ -7,7 +7,7 @@ module.exports = {
   ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
   skipWaiting: true,
   clientsClaim: true,
-  additionalManifestEntries: [{ url: "/offline?v=2", revision }],
+  additionalManifestEntries: [{ url: "/offline?v=3", revision }],
   runtimeCaching: [
     // Cache-first strategy for Google Fonts stylesheets
     {
@@ -15,9 +15,6 @@ module.exports = {
       handler: "CacheFirst",
       options: {
         cacheName: "google-fonts-stylesheets",
-        expiration: {
-          maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
-        },
         cacheableResponse: { statuses: [0, 200] },
       },
     },
@@ -27,9 +24,6 @@ module.exports = {
       handler: "CacheFirst",
       options: {
         cacheName: "google-fonts-webfonts",
-        expiration: {
-          maxAgeSeconds: 60 * 60 * 24 * 30, // 1 year
-        },
         cacheableResponse: { statuses: [0, 200] },
       },
     },
@@ -40,9 +34,6 @@ module.exports = {
       handler: "CacheFirst",
       options: {
         cacheName: "cdn-libraries",
-        expiration: {
-          maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
-        },
         cacheableResponse: { statuses: [0, 200] },
       },
     },
@@ -61,9 +52,6 @@ module.exports = {
       handler: "NetworkFirst",
       options: {
         cacheName: "network-first",
-        expiration: {
-          maxAgeSeconds: 60 * 60 * 24, // 1 day
-        },
       },
     },
     // Stale-while-revalidate for everything else
@@ -72,9 +60,6 @@ module.exports = {
       handler: "StaleWhileRevalidate",
       options: {
         cacheName: "default-cache",
-        expiration: {
-          maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days instead of 1 day
-        },
       },
     },
   ],
