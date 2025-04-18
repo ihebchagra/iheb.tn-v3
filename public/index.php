@@ -4,6 +4,7 @@ global $route;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($route) {
+        case 'view':
         case 'analytics':
             require_once $_SERVER['DOCUMENT_ROOT'] . "/../api/$route.php";
             exit;
@@ -56,10 +57,8 @@ header('Pragma: no-cache');
     <link rel="stylesheet" href="/styles.css?v=831">
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
-    <!-- TODO: Implement google analytics -->
     <!-- TODO: install diaglog and button -->
     <!-- TODO: add fmt and other news -->
-    <!-- TODO: add links filter -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

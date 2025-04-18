@@ -1,5 +1,6 @@
 <div style="display: none;" href='/medicasearch' id="metadata">Médicasearch - iheb.tn</div>
 
+<!-- TODO: Implement medicasearch analytics-->
 <h1>💊 Médicasearch</h1>
 
 <!-- Search Component Container -->
