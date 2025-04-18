@@ -67,6 +67,15 @@ header('Pragma: no-cache');
         }
     </script>
     <link rel="prefetch" href="/offline?v=2">
+    <!-- Preload -->
+    <link ref="preload" as="fetch" type="application/json" crossorigin="anonymous" href='/assets/db/api20e.json?v=7'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/api20ne.json?v=8'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/apistrep.json?v=10'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/apicoryne.json?v=15'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/apinh.json?v=11'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/apistaph.json?v=12'>
+    <link ref="preload" as="fetch" type="applicatioon" crossorigin="anon" href='/assets/db/id32c.json?v=10'>
+    <link rel="preload" href="/assets/db/medicaments_fts.db" as="fetch" type="application/octet-stream" crossorigin="anonymous">
 </head>
 
 <body>
