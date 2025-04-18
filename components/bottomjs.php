@@ -224,4 +224,38 @@ function logPageView(currentUrl) {
   });
 }
 
+function showIphoneInstallDialog() {
+  document.documentElement.style.setProperty("--show-iphone-install", "block");
+}
+
+window.addEventListener("appinstalled", () => {
+  document.documentElement.style.setProperty("--show-install", "none");
+  document.documentElement.style.setProperty("--show-install-banner", "none");
+});
+
+const isIphone = /iPhone/i.test(navigator.userAgent);
+const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+
+if (isIphone && !isStandalone) {
+  window.installType = "iphone";
+  document.documentElement.style.setProperty("--show-install", "block");
+} else if (window.installEvent !== undefined) {
+  if (!isStandalone) {
+    document.documentElement.style.setProperty("--show-install", "block");
+  }
+} else {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    if (!isStandalone) {
+      document.documentElement.style.setProperty("--show-install", "block");
+      window.installEvent = event;
+      window.installType = "android";
+    }
+  });
+  if (window.installType !== 'android' && !isStandalone) {
+      document.documentElement.style.setProperty("--show-install", "block");
+      window.installType = "other";
+  }
+}
+
 </script>

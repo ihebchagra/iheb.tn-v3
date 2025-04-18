@@ -1,6 +1,5 @@
 <div style="display: none;" href='/apicalcul' id="metadata">APIcalcul - iheb.tn</div>
 
-<!-- TODO: Implement apicalcul analytics-->
 <h1>🧪 APIcalcul</h1>
 
 <div id="apicalcul-app" x-data="apicalculApp()" x-init="init()" class="apicalcul-container">

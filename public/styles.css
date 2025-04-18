@@ -149,6 +149,13 @@ summary {
 template {
   display: none;
 }
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent !important;
+}
 
 /*! CC BY-SA 3.0 License | https://stackoverflow.com/a/36118384/1154965 */
 @keyframes blink {
@@ -196,6 +203,9 @@ template {
 
   --progress-width: 0%;
   --progress-opacity: 0%;
+  --show-install-iphone: none;
+  --show-install-other: none;
+  --show-install: none;
 }
 
 :root:has(#dark-toggle:checked) {
@@ -238,7 +248,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background: var(--bg4);
   width: 100%;
 }
 
@@ -439,7 +449,25 @@ header > a.logo {
   user-select: none;
 }
 
+header #install {
+  background: var(--purple);
+  color: var(--bg);
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  cursor: pointer;
+  display: var(--show-install);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 header > .dark-toggle {
+  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;

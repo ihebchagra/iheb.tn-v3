@@ -54,11 +54,9 @@ header('Pragma: no-cache');
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Local Deps -->
-    <link rel="stylesheet" href="/styles.css?v=831">
+    <link rel="stylesheet" href="/styles.css?v=862">
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
-    <!-- TODO: install diaglog and button -->
-    <!-- TODO: add fmt and other news -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -80,6 +78,17 @@ header('Pragma: no-cache');
         <a class="logo" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-select="#content">
             iheb.tn
         </a>
+        <span id="install" x-init 
+            @click="
+                if (window.installType === 'android') {
+                    window.installEvent.prompt();
+                } else if (window.installType === 'iphone') {
+                    document.documentElement.style.setProperty('--show-install-iphone', 'block');
+                } else if (window.installType === 'other') {
+                    document.documentElement.style.setProperty('--show-install-other', 'block');
+                }
+            "
+        >Installer 📥</span>
         <label for="dark-toggle" class="dark-toggle">
         </label>
     </header>
@@ -90,6 +99,9 @@ header('Pragma: no-cache');
     </main>
     <footer>Made with ❤️ by Iheb Chagra</footer>
     <?= $bottomjs ?>
+    <?php
+        include_once $_SERVER["DOCUMENT_ROOT"] . '/../components/install.php';
+    ?>
 </body>
 
 </html>
