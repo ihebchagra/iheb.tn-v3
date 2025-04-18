@@ -12,11 +12,11 @@ bump:
 
 upload:
 	@echo "Uploading to testing..."
-	@./sync_v2.sh /testing.promety.tn/
+	@./sync.sh
 
-commit:
-	@echo "Uploading to prod..."
-	@./sync_v2.sh /promety.tn/
+# commit:
+# 	@echo "Uploading to prod..."
+# 	@./sync_v2.sh /promety.tn/
 
 dev:
 	@echo "Starting development environment..."

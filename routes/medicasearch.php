@@ -38,8 +38,8 @@
       class="search-button"
       :disabled="isLoading || !searchTerm.trim()"
       aria-label="Effectuer la recherche"
-    >Rechercher</button>
-    <p x-show="searchResults.length > 0" x-text="resultCountText" class="result-count-text" aria-live="polite"></p> 
+    >Recherche</button>
+    <!--<p x-show="searchResults.length > 0" x-text="resultCountText" class="result-count-text" aria-live="polite"></p>-->
   </div>
 
   <!-- Search Results Section -->
@@ -52,7 +52,6 @@
 
     <!-- Filter Buttons Area -->
     <div x-show="searchResults.length > 0" class="filter-controls">
-      <span>Filtres rapides :</span>
       <button @click="activeFilter = 'all'"
         :class="{ 'active-filter-button': activeFilter === 'all' }"
         class="filter-button">
@@ -63,10 +62,15 @@
         class="filter-button">
         Avec Prix
       </button>
-      <span class="filter-count"
+      <button @click="activeFilter = 'hasLinks'"
+        :class="{ 'active-filter-button': activeFilter === 'hasLinks' }"
+        class="filter-button">
+        Avec Liens
+      </button>
+      <!--<span class="filter-count"
         x-text="`(${filteredResults.length} affiché${filteredResults.length !== 1 ? 's' : ''})`"
         aria-live="polite">
-      </span>
+      </span>-->
     </div>
 
     <!-- Error Message -->
@@ -97,12 +101,12 @@
         </div>
 
         <!-- Collapsible Content -->
-        <div x-show="open" x-collapse class="result-details" 
-             x-init="$nextTick(() => updateLastVisibleSection($el))" 
+        <div x-show="open" x-collapse class="result-details"
+             x-init="$nextTick(() => updateLastVisibleSection($el))"
              @x-collapse:expanded="updateLastVisibleSection($el)">
 
           <!-- Primary Information -->
-          <div class="details-section" 
+          <div class="details-section"
                x-show="result.DCI || result.Laboratoire"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.DCI || result.Laboratoire)">
@@ -121,7 +125,7 @@
           </div>
 
           <!-- Pricing & CNAM Info -->
-          <div class="details-section" 
+          <div class="details-section"
                x-show="result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT)">
@@ -159,7 +163,7 @@
           </div>
 
           <!-- Regulatory Details -->
-          <div class="details-section" 
+          <div class="details-section"
                x-show="result.AMM || result.Date_AMM || result.Tableau"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.AMM || result.Date_AMM || result.Tableau)">
@@ -184,7 +188,7 @@
           </div>
 
           <!-- Formulation & Presentation -->
-          <div class="details-section" 
+          <div class="details-section"
                x-show="result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement)">
@@ -221,7 +225,7 @@
           </div>
 
           <!-- Classification -->
-          <div class="details-section" 
+          <div class="details-section"
                x-show="result.Classe_Therapeutique || result.Sous_Classe_Therapeutique"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.Classe_Therapeutique || result.Sous_Classe_Therapeutique)">
@@ -250,7 +254,7 @@
           </template>
 
           <!-- Links -->
-          <div class="details-section field-links" 
+          <div class="details-section field-links"
                x-show="result.RCP_Link || result.Notice_Link"
                :class="{'last-visible-section': isLastVisibleSection($el)}"
                x-effect="if(open) updateVisibilityStatus($el, result.RCP_Link || result.Notice_Link)">
@@ -270,7 +274,6 @@
 </div> <!-- End Search Component Container -->
 
 <script>
-// Helper function to format medication titles
 function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
   if (Forme !== null) {
     Forme = ' ' + Forme;
@@ -288,7 +291,6 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
 }
 
   function medicamentSearchApp() {
-    // --- State Variables ---
     return {
     isLoading: true,
     loadingStatus: 'Initialisation...',
@@ -302,99 +304,72 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
     searchError: null,
     resultCountText: '',
     searchPerformed: false,
-    searchInProgress: false, // New flag for search-in-progress state
+    searchInProgress: false,
     activeFilter: 'all',
-
-    // --- Database Configuration ---
     dbPath: '/assets/db/medicaments_fts.db',
     ftsTableName: 'medicaments_fts',
 
-    // --- New functions for handling last visible section ---
     isLastVisibleSection(el) {
       if (!el || !el.parentElement) return false;
-      
-      // Get all direct child sections
       const sections = Array.from(el.parentElement.querySelectorAll('.details-section'));
-      
-      // Filter to find visible sections
-      const visibleSections = sections.filter(section => 
-        section.offsetParent !== null // Check if visible in DOM
+      const visibleSections = sections.filter(section =>
+        section.offsetParent !== null
       );
-      
-      // Return true if this is the last visible section
       return visibleSections.length > 0 && visibleSections[visibleSections.length - 1] === el;
     },
-    
+
     updateVisibilityStatus(el, isVisible) {
-      // Wait for Alpine to update the DOM first
       this.$nextTick(() => {
-        // Update the last visible section classes after visibility changes
         if (el && el.parentElement) {
           this.updateLastVisibleSection(el.parentElement);
         }
       });
     },
-    
+
     updateLastVisibleSection(container) {
       if (!container) return;
-      
-      // Short delay to ensure DOM is updated
       setTimeout(() => {
-        // Get all section elements
         const sections = Array.from(container.querySelectorAll('.details-section'));
-        
-        // Reset all sections first
         sections.forEach(section => section.classList.remove('last-visible-section'));
-        
-        // Find visible sections (those actually showing in the DOM)
-        const visibleSections = sections.filter(section => 
+        const visibleSections = sections.filter(section =>
           section.offsetParent !== null
         );
-        
-        // Mark the last visible one
         if (visibleSections.length > 0) {
           visibleSections[visibleSections.length - 1].classList.add('last-visible-section');
         }
-      }, 50); // Small delay to ensure DOM is rendered
+      }, 50);
     },
 
     formatCategorie(categorie) {
       if (!categorie) return '';
-
-      // Convert category to VEIC format
       if (categorie === 'Vital') return 'V';
       if (categorie === 'Essentiel') return 'E';
       if (categorie === 'Intermédiaire') return 'I';
       if (categorie === 'Confort') return 'C';
-
-      // If it's already in VEIC format or unknown format, return as is
       return categorie;
     },
-    
+
     expandVEIC(value) {
       if (!value) return '';
-
-      // Expand single letters to full words
       if (value === 'V') return 'Vital';
       if (value === 'E') return 'Essentiel';
       if (value === 'I') return 'Intermédiaire';
       if (value === 'C') return 'Confort';
-
-      // If already a full word or other format, return as is
       return value;
     },
-    
-    // --- Computed Properties ---
+
     get filteredResults() {
+      let results = this.searchResults;
+
       if (this.activeFilter === 'hasPrice') {
-        return this.searchResults.filter(result => result.PRIX_PUBLIC != null && result.PRIX_PUBLIC !== '');
+        results = results.filter(result => result.PRIX_PUBLIC != null && result.PRIX_PUBLIC !== '');
+      } else if (this.activeFilter === 'hasLinks') {
+        results = results.filter(result => (result.RCP_Link && result.RCP_Link.trim() !== '') || (result.Notice_Link && result.Notice_Link.trim() !== ''));
       }
-      
-      // Limit results to 100 for performance
-      return this.searchResults.slice(0, 100);
+
+      return results.slice(0, 100);
     },
 
-    // --- Initialization Method ---
     async initLoader() {
       this.isLoading = true;
       this.dbLoaded = false;
@@ -403,15 +378,11 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
 
       try {
         this.updateStatus('Initialisation...', 5);
-
-        // 1. Initialize sql.js
         this.SQL = await initSqlJs({
           locateFile: filename => `/${filename}`
         });
-
         this.updateStatus(`Demande du fichier de base de données...`, 15);
 
-        // 2. Fetch the database file and track progress
         const response = await fetch(this.dbPath);
         if (!response.ok) {
           throw new Error(`Échec de la récupération de la base de données: ${response.statusText} (Statut: ${response.status})`);
@@ -445,14 +416,13 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
           if (totalSize) {
             const progress = (bytesLoaded / totalSize) * 100;
             this.loadingProgress = Math.min(95, 20 + (progress * 0.75));
-            this.updateStatus(`Téléchargement de la base de données pour une fonctionnalité hors ligne... ${(bytesLoaded / 1024 / 1024).toFixed(2)} Mo / ${(totalSize / 1024 / 1024).toFixed(2)} Mo`);
+            this.updateStatus(`Téléchargement de la base de données pour la fonctionnalité hors ligne... ${(bytesLoaded / 1024 / 1024).toFixed(2)} Mo / ${(totalSize / 1024 / 1024).toFixed(2)} Mo`);
           } else {
             this.updateStatus(`Chargement de la base de données... ${(bytesLoaded / 1024 / 1024).toFixed(2)} Mo chargés`);
           }
         }
         this.updateStatus('Téléchargement terminé. Traitement...', 95);
 
-        // Concatenate chunks
         const finalTotalSize = totalSize || bytesLoaded;
         let dbArray = new Uint8Array(finalTotalSize);
         let offset = 0;
@@ -460,9 +430,8 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
           dbArray.set(chunk, offset);
           offset += chunk.length;
         }
-        chunks = []; // Release memory
+        chunks = [];
 
-        // 3. Load the database into sql.js
         this.updateStatus('Chargement de la base de données en mémoire...', 98);
         this.db = new this.SQL.Database(dbArray);
         this.updateStatus('Base de données prête !', 100);
@@ -476,7 +445,6 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
       }
     },
 
-    // --- Helper Methods ---
     updateStatus(message, progress) {
       this.loadingStatus = message;
       if (progress !== undefined) {
@@ -494,7 +462,6 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
         .join(' ');
     },
 
-    // --- Search Action ---
     async performSearch() {
       if (!this.dbLoaded || !this.db) {
         this.searchError = "Base de données non prête.";
@@ -512,9 +479,9 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
       this.searchError = null;
       this.searchPerformed = true;
       this.lastSearchedTerm = this.searchTerm;
-      this.searchInProgress = true; // Show loading indicator
+      this.searchInProgress = true;
       this.resultCountText = 'Recherche en cours...';
-      
+
       const ftsQueryTerm = this.formatSearchTerm(this.searchTerm);
 
       if (!ftsQueryTerm) {
@@ -526,9 +493,8 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
       }
 
       try {
-        // Short delay to ensure UI updates before potentially blocking operation
         await new Promise(resolve => setTimeout(resolve, 10));
-        
+
         const query = `
           SELECT
               rowid,
@@ -568,10 +534,10 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
         this.searchResults = [];
         this.resultCountText = '';
       } finally {
-        this.searchInProgress = false; // Hide loading indicator
+        this.searchInProgress = false;
       }
     },
-    
+
     resetFilterIfNeeded() {
       if (!this.searchTerm.trim()) {
         this.searchResults = [];
@@ -677,7 +643,6 @@ h1, h2 {
 /* Search UI */
 .search-ui-section {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
   padding: 15px 10px;
@@ -689,7 +654,10 @@ h1, h2 {
 .search-input {
   flex-grow: 1;
   min-width: 200px;
-  padding: 10px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border: 1px solid var(--bg4);
   border-radius: 4px;
   background-color: var(--bg);

@@ -116,13 +116,13 @@
     },
     {
       "key": "PACa",
-      "label": "Phenylacetate",
+      "label": "Phenylacétate",
       "posClass": "white",
       "negClass": "gray"
     },
     {
       "key": "OX",
-      "label": "Oxidase",
+      "label": "Oxydase",
       "posClass": "white",
       "negClass": "gray"
     }

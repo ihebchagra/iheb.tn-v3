@@ -167,7 +167,7 @@
                 let url = '';
                 if (key === 'api10s') url = '/assets/db/api10s.json';
                 else if (key === 'api20e') url = '/assets/db/api20e.json?v=7';
-                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=6';
+                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=8';
                 else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=10';
                 else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=15';
                 else if (key === 'apinh') url = '/assets/db/apinh.json?v=11';

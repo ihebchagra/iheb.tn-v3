@@ -7,7 +7,7 @@
     </div>
 </div>
 <h2>À Propos</h2>
-<p>Bonjour ! Je suis <b>Iheb Chagra</b>, médecin résident en microbiologie. Bienvenue sur mon site web personnel. Il contient plusieurs outils pour la pratique médicale. J'espère qu'il vous sera utile.</p>
+<p><span x-init x-text="getGreeting()">Bonjour</span>! Je suis <b>Iheb Chagra</b>, médecin résident en microbiologie. Bienvenue sur mon site web personnel. Il contient plusieurs outils pour la pratique médicale. J'espère qu'il vous sera utile.</p>
 <h2>Offrez-moi un café ! ☕</h2>
 <p>Bien que ce site soit gratuit à tous et sans publicités, sa maintenance et son développement sont entièrement à ma charge, en temps et en argent. Si vous souhaitez soutenir mon travail, votre contribution serait grandement appréciée. <a href="https://gateway.konnect.network/me/66d518dc0e581535c3cdfb0d"><b>Faire un don sur ce lien</b></a></p>
 <h2>Mes Projets</h2>
@@ -49,6 +49,16 @@
 
 
 <script>
+function getGreeting() {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 18 || currentHour < 5) {
+        return 'Bonsoir';
+    } else {
+        return 'Bonjour';
+    }
+}
+
 function typewriter() {
     return {
         jobs: [
