@@ -146,10 +146,10 @@
       "SOR": 0,
       "LAC": 98,
       "TRE": 100,
-      "INU": "",
-      "RAF": 5,
-      "AMD": 92,
-      "GLYG": 99,
+      "INU": 5,
+      "RAF": 92,
+      "AMD": 99,
+      "GLYG": 0,
       "HEM": 0
     },
     {
@@ -163,18 +163,18 @@
       "BGAL": 41,
       "PAL": 50,
       "LAP": 92,
-      "ADH": "",
+      "ADH": 28,
       "RIB": 28,
-      "ARA": 28,
-      "MAN": 0,
-      "SOR": 32,
-      "LAC": 13,
-      "TRE": 56,
-      "INU": "",
-      "RAF": 64,
-      "AMD": 1,
-      "GLYG": 1,
-      "HEM": 40
+      "ARA": 0,
+      "MAN": 32,
+      "SOR": 13,
+      "LAC": 56,
+      "TRE": 64,
+      "INU": 1,
+      "RAF": 1,
+      "AMD": 40,
+      "GLYG": 0,
+      "HEM": 0
     },
     {
       "Taxon": "Aerc.viridans 1",
@@ -194,11 +194,11 @@
       "SOR": 70,
       "LAC": 83,
       "TRE": 99,
-      "INU": "",
-      "RAF": 33,
-      "AMD": 41,
-      "GLYG": 70,
-      "HEM": 33
+      "INU": 33,
+      "RAF": 41,
+      "AMD": 70,
+      "GLYG": 33,
+      "HEM": 1
     },
     {
       "Taxon": "Aerc.viridans 2",
@@ -218,11 +218,11 @@
       "SOR": 2,
       "LAC": 70,
       "TRE": 89,
-      "INU": "",
-      "RAF": 1,
-      "AMD": 5,
-      "GLYG": 24,
-      "HEM": 1
+      "INU": 1,
+      "RAF": 5,
+      "AMD": 24,
+      "GLYG": 1,
+      "HEM": 5
     },
     {
       "Taxon": "Aerc.viridans 3",
@@ -242,10 +242,10 @@
       "SOR": 5,
       "LAC": 91,
       "TRE": 99,
-      "INU": "",
-      "RAF": 37,
-      "AMD": 99,
-      "GLYG": 14,
+      "INU": 37,
+      "RAF": 99,
+      "AMD": 14,
+      "GLYG": 1,
       "HEM": 1
     },
     {
@@ -266,7 +266,7 @@
       "SOR": 0,
       "LAC": 0,
       "TRE": 20,
-      "INU": "",
+      "INU": 0,
       "RAF": 0,
       "AMD": 0,
       "GLYG": 0,
@@ -290,11 +290,11 @@
       "SOR": 95,
       "LAC": 95,
       "TRE": 99,
-      "INU": "",
-      "RAF": 1,
-      "AMD": 40,
-      "GLYG": 15,
-      "HEM": 0
+      "INU": 1,
+      "RAF": 40,
+      "AMD": 15,
+      "GLYG": 0,
+      "HEM": 1
     },
     {
       "Taxon": "Entero.durans",
@@ -314,11 +314,11 @@
       "SOR": 0,
       "LAC": 84,
       "TRE": 76,
-      "INU": "",
-      "RAF": 0,
-      "AMD": 1,
-      "GLYG": 56,
-      "HEM": 0
+      "INU": 0,
+      "RAF": 1,
+      "AMD": 56,
+      "GLYG": 0,
+      "HEM": 18
     },
     {
       "Taxon": "Entero.faecalis",
@@ -338,11 +338,11 @@
       "SOR": 92,
       "LAC": 92,
       "TRE": 100,
-      "INU": "",
-      "RAF": 0,
-      "AMD": 1,
-      "GLYG": 96,
-      "HEM": 2
+      "INU": 0,
+      "RAF": 1,
+      "AMD": 96,
+      "GLYG": 2,
+      "HEM": 1
     },
     {
       "Taxon": "Entero.faecium",
@@ -362,11 +362,11 @@
       "SOR": 18,
       "LAC": 84,
       "TRE": 98,
-      "INU": "",
-      "RAF": 15,
-      "AMD": 10,
-      "GLYG": 60,
-      "HEM": 3
+      "INU": 15,
+      "RAF": 10,
+      "AMD": 60,
+      "GLYG": 3,
+      "HEM": 1
     },
     {
       "Taxon": "Gardnerel.vaginalis",
@@ -386,11 +386,11 @@
       "SOR": 0,
       "LAC": 1,
       "TRE": 0,
-      "INU": "",
+      "INU": 0,
       "RAF": 0,
-      "AMD": 0,
-      "GLYG": 73,
-      "HEM": 53
+      "AMD": 73,
+      "GLYG": 53,
+      "HEM": 0
     },
     {
       "Taxon": "Gem.haemolysans",
@@ -410,11 +410,11 @@
       "SOR": 10,
       "LAC": 5,
       "TRE": 2,
-      "INU": "",
+      "INU": 0,
       "RAF": 0,
-      "AMD": 0,
-      "GLYG": 10,
-      "HEM": 5
+      "AMD": 10,
+      "GLYG": 5,
+      "HEM": 1
     },
     {
       "Taxon": "Gem.morbillorum",
@@ -434,11 +434,11 @@
       "SOR": 0,
       "LAC": 1,
       "TRE": 11,
-      "INU": "",
-      "RAF": 3,
-      "AMD": 1,
-      "GLYG": 20,
-      "HEM": 5
+      "INU": 3,
+      "RAF": 1,
+      "AMD": 20,
+      "GLYG": 5,
+      "HEM": 0
     },
     {
       "Taxon": "Globi.sanguinis",
@@ -458,11 +458,11 @@
       "SOR": 47,
       "LAC": 76,
       "TRE": 100,
-      "INU": "",
-      "RAF": 71,
-      "AMD": 95,
-      "GLYG": 100,
-      "HEM": 90
+      "INU": 71,
+      "RAF": 95,
+      "AMD": 100,
+      "GLYG": 90,
+      "HEM": 0
     },
     {
       "Taxon": "Granuli.adiacens",
@@ -482,7 +482,7 @@
       "SOR": 0,
       "LAC": 0,
       "TRE": 0,
-      "INU": "",
+      "INU": 0,
       "RAF": 0,
       "AMD": 0,
       "GLYG": 0,
@@ -506,10 +506,10 @@
       "SOR": 0,
       "LAC": 97,
       "TRE": 30,
-      "INU": "",
-      "RAF": 0,
-      "AMD": 15,
-      "GLYG": 25,
+      "INU": 0,
+      "RAF": 15,
+      "AMD": 25,
+      "GLYG": 0,
       "HEM": 0
     },
     {
@@ -530,11 +530,11 @@
       "SOR": 1,
       "LAC": 72,
       "TRE": 87,
-      "INU": "",
-      "RAF": 4,
-      "AMD": 5,
-      "GLYG": 90,
-      "HEM": 3
+      "INU": 4,
+      "RAF": 5,
+      "AMD": 90,
+      "GLYG": 3,
+      "HEM": 1
     },
     {
       "Taxon": "Leuconostoc spp",
@@ -554,10 +554,10 @@
       "SOR": 4,
       "LAC": 35,
       "TRE": 65,
-      "INU": "",
-      "RAF": 0,
-      "AMD": 42,
-      "GLYG": 11,
+      "INU": 0,
+      "RAF": 42,
+      "AMD": 11,
+      "GLYG": 0,
       "HEM": 0
     },
     {
