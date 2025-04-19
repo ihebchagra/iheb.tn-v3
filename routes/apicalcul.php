@@ -167,7 +167,7 @@
                 let url = '';
                 if (key === 'api10s') url = '/assets/db/api10s.json';
                 else if (key === 'api20e') url = '/assets/db/api20e.json?v=7';
-                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=8';
+                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=10';
                 else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=10';
                 else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=15';
                 else if (key === 'apinh') url = '/assets/db/apinh.json?v=11';
@@ -455,17 +455,27 @@
     }
 
     .toggle-group button.active.black {
-        background: var(--fg);
-        color: var(--bg);
+        background: #222;
+        color: #eee;
     }
 
     .toggle-group button.active.white {
-        background: var(--bg_h);
-        color: var(--fg);
+        background: #eee;
+        color: #222;
     }
 
     .toggle-group button.active.orange {
         background: var(--orange);
+        color: var(--bg);
+    }
+
+    .toggle-group button.active.purple {
+        background: var(--purple);
+        color: var(--bg);
+    }
+
+    .toggle-group button.active.purple {
+        background: var(--purple);
         color: var(--bg);
     }
 
@@ -623,12 +633,12 @@
     }
 
     .black {
-        color: var(--fg2);
+        color: black;
         font-weight: bold;
     }
 
     .white {
-        color: var(--bg4);
+        color: white;
         font-weight: bold;
     }
 
@@ -639,6 +649,16 @@
 
     .purple {
         color: var(--purple);
+        font-weight: bold;
+    }
+
+    .brown {
+        color: var(--brown);
+        font-weight: bold;
+    }
+
+    .brown {
+        color: var(--pink);
         font-weight: bold;
     }
 </style>
