@@ -57,7 +57,7 @@ $height = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($p
             if (!element.hasAttribute('src')) {
               element.setAttribute('src', element.getAttribute('data-src'));
             }
-            element.scrollIntoView({ block: 'start', behavior: 'auto' });
+            element.scrollIntoView({ block: 'center', behavior: 'auto' });
           }
         }
       }
