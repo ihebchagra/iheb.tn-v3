@@ -1,6 +1,7 @@
 <div style="display: none;" href='/medicasearch' id="metadata">Médicasearch - iheb.tn</div>
 
 <h1>💊 Médicasearch</h1>
+<!-- add autocomplete -->
 
 <!-- Search Component Container -->
 <div id="medicament-search" x-data="medicamentSearchApp()" x-init="initLoader()">
@@ -21,25 +22,53 @@
     <span x-show="isLoading && loadingProgress === 0" class="loading-spinner" aria-hidden="true">⏳</span>
   </div>
 
-  <!-- Search UI (Shown after loading) -->
+<!-- Search UI (Shown after loading) -->
   <div x-show="dbLoaded" class="search-ui-section" x-transition>
-    <input
-      type="search"
-      id="search-term-input"
-      placeholder="Nom, DCI, Indication..."
-      x-model="searchTerm"
-      @keydown.enter="performSearch()"
-      @input="searchPerformed = false; searchResults = []"
-      class="search-input"
-      aria-label="Terme de recherche"
-    >
+    <div class="autocomplete-container">
+      <input
+        type="search"
+        id="search-term-input"
+        placeholder="Nom, DCI, Indication..."
+        x-model="searchTerm"
+        @keydown="handleAutocompleteKeydown($event)"
+        @keydown.enter.prevent="performSearch()"
+        @input="handleSearchInput()"
+        @focus="fetchAutocompleteResults()"
+        @click.away="closeAutocomplete()"
+        class="search-input"
+        aria-label="Terme de recherche"
+      >
+
+      <!-- Autocomplete Dropdown -->
+      <div 
+        x-show="showAutocomplete" 
+        class="autocomplete-dropdown"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 translate-y-1"
+        x-transition:enter-end="opacity-100 translate-y-0"
+      >
+        <div x-show="autocompleteLoading" class="autocomplete-loading">
+          Chargement des suggestions...
+        </div>
+        <ul x-show="!autocompleteLoading && autocompleteResults.length > 0">
+          <template x-for="(item, index) in autocompleteResults" :key="index">
+            <li 
+              @click="selectAutocompleteItem(index)"
+              @mouseenter="selectedAutocompleteIndex = index"
+              :class="{ 'selected': selectedAutocompleteIndex === index }"
+              x-html="item.html"
+            ></li>
+          </template>
+        </ul>
+      </div>
+    </div>
+
     <button
       @click="performSearch()"
       class="search-button"
       :disabled="isLoading || !searchTerm.trim()"
       aria-label="Effectuer la recherche"
     >Recherche</button>
-    <!--<p x-show="searchResults.length > 0" x-text="resultCountText" class="result-count-text" aria-live="polite"></p>-->
   </div>
 
   <!-- Search Results Section -->
@@ -289,9 +318,8 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
 
   return '<span class="title-main">' + Nom_Commercial + '</span><span class="title-main">' + Forme + Presentation + '</span>';
 }
-
-  function medicamentSearchApp() {
-    return {
+function medicamentSearchApp() {
+  return {
     isLoading: true,
     loadingStatus: 'Initialisation...',
     loadingProgress: 0,
@@ -308,6 +336,13 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
     activeFilter: 'all',
     dbPath: '/assets/db/medicaments_fts.db',
     ftsTableName: 'medicaments_fts',
+    
+    // Add new properties for autocomplete
+    showAutocomplete: false,
+    autocompleteResults: [],
+    autocompleteLoading: false,
+    selectedAutocompleteIndex: -1,
+    autocompleteTimeout: null,
 
     isLastVisibleSection(el) {
       if (!el || !el.parentElement) return false;
@@ -481,6 +516,7 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
       this.lastSearchedTerm = this.searchTerm;
       this.searchInProgress = true;
       this.resultCountText = 'Recherche en cours...';
+      this.closeAutocomplete(); // Close autocomplete when performing search
 
       const ftsQueryTerm = this.formatSearchTerm(this.searchTerm);
 
@@ -546,10 +582,134 @@ function makeTitle(Nom_Commercial, Forme, Presentation, PRIX_PUBLIC) {
         this.resultCountText = '';
         this.searchError = null;
       }
+    },
+    
+    // New autocomplete methods
+    async fetchAutocompleteResults() {
+      if (!this.dbLoaded || !this.db || !this.searchTerm.trim()) {
+        this.autocompleteResults = [];
+        this.showAutocomplete = false;
+        return;
+      }
+      
+      this.autocompleteLoading = true;
+      const term = this.searchTerm.trim();
+      
+      try {
+        // Shorter formatted term for autocomplete to get broader results
+        const ftsQueryTerm = term
+          .split(/\s+/)
+          .filter(part => part.length > 0)
+          .map(part => part.replace(/[^a-zA-Z0-9\u00C0-\u017F]/g, ' ').trim())
+          .filter(part => part.length > 0)
+          .map(part => part + '*')
+          .join(' ');
+          
+        if (!ftsQueryTerm) {
+          this.autocompleteResults = [];
+          this.showAutocomplete = false;
+          this.autocompleteLoading = false;
+          return;
+        }
+        
+        const query = `
+          SELECT DISTINCT Nom_Commercial, DCI
+          FROM "${this.ftsTableName}"
+          WHERE "${this.ftsTableName}" MATCH ?
+          ORDER BY rank
+          LIMIT 10
+        `;
+        
+        const stmt = this.db.prepare(query);
+        stmt.bind([ftsQueryTerm]);
+        
+        const results = [];
+        while (stmt.step()) {
+          const row = stmt.getAsObject();
+          const suggestion = {
+            text: row.Nom_Commercial + (row.DCI ? ' (' + row.DCI + ')' : ''),
+            html: this.highlightMatch(row.Nom_Commercial, term) + 
+                 (row.DCI ? ' (' + this.highlightMatch(row.DCI, term) + ')' : '')
+          };
+          results.push(suggestion);
+        }
+        stmt.free();
+        
+        this.autocompleteResults = results;
+        this.showAutocomplete = results.length > 0;
+      } catch (err) {
+        console.error("Autocomplete error:", err);
+        this.autocompleteResults = [];
+        this.showAutocomplete = false;
+      } finally {
+        this.autocompleteLoading = false;
+      }
+    },
+    
+    highlightMatch(text, term) {
+      if (!text) return '';
+      
+      // Simple highlighting - case insensitive
+      const regex = new RegExp('(' + term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
+      return text.replace(regex, '<strong class="highlight">$1</strong>');
+    },
+    
+    selectAutocompleteItem(index) {
+      if (index >= 0 && index < this.autocompleteResults.length) {
+        this.searchTerm = this.autocompleteResults[index].text;
+        this.closeAutocomplete();
+        this.performSearch();
+      }
+    },
+    
+    handleAutocompleteKeydown(event) {
+      if (!this.showAutocomplete) return;
+      
+      // Down arrow
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.selectedAutocompleteIndex = Math.min(
+          this.selectedAutocompleteIndex + 1, 
+          this.autocompleteResults.length - 1
+        );
+      }
+      // Up arrow
+      else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        this.selectedAutocompleteIndex = Math.max(this.selectedAutocompleteIndex - 1, -1);
+      }
+      // Enter key
+      else if (event.key === 'Enter') {
+        if (this.selectedAutocompleteIndex >= 0) {
+          event.preventDefault();
+          this.selectAutocompleteItem(this.selectedAutocompleteIndex);
+        }
+      }
+      // Escape key
+      else if (event.key === 'Escape') {
+        event.preventDefault();
+        this.closeAutocomplete();
+      }
+    },
+    
+    closeAutocomplete() {
+      this.showAutocomplete = false;
+      this.selectedAutocompleteIndex = -1;
+    },
+    
+    // Modified input event handler
+    handleSearchInput() {
+      this.searchPerformed = false;
+      this.searchResults = [];
+      
+      // Debounce autocomplete requests
+      clearTimeout(this.autocompleteTimeout);
+      this.autocompleteTimeout = setTimeout(() => {
+        this.fetchAutocompleteResults();
+      }, 200); // 200ms delay
     }
   };
-};
-</script>
+}</script>
 
 <style>
 /* Base Styles */
@@ -868,5 +1028,96 @@ h1, h2 {
 
 h1{
   margin-bottom: 1rem;
+}
+/* Autocomplete Styles */
+.autocomplete-container {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+}
+
+.search-input {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 200px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid var(--bg4);
+  border-radius: 4px;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-size: 1em;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: var(--bg);
+  border: 1px solid var(--bg4);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+}
+
+.autocomplete-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-dropdown li {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--bg2);
+  transition: background-color 0.15s ease;
+}
+
+.autocomplete-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-dropdown li:hover,
+.autocomplete-dropdown li.selected {
+  background-color: var(--bg2);
+}
+
+.autocomplete-dropdown li .highlight {
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.autocomplete-loading {
+  padding: 10px;
+  text-align: center;
+  color: var(--fg3);
+  font-style: italic;
+}
+
+/* Animation transitions */
+.transition {
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.duration-200 {
+  transition-duration: 200ms;
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-100 {
+  opacity: 1;
+}
+.translate-y-0 {
+  transform: translateY(0);
+}
+.translate-y-1 {
+  transform: translateY(0.25rem);
 }
 </style>
