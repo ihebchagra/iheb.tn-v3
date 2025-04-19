@@ -1,6 +1,6 @@
 <div style="display: none;" href="/casfmsearch<?= $_GET['q'] ? '?q=' . $_GET['q'] : '' ?>" id="metadata">CA-SFM Search - iheb.tn</div>
 
-<h1>CA-SFM Search</h1>
+<h1>🦠 CA-SFM Search</h1>
 
 <!-- Search Component Container -->
 <div id="casfm-search" x-data="casfmSearchApp()" x-init="initLoader()">

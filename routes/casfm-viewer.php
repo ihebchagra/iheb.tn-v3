@@ -26,7 +26,12 @@ echo '<div style="display: none;" href="' . $metadata . '" id="metadata">CA-SFM 
       foreach (range(1, 177) as $page) {
       $width = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($page >= 165 && $page <= 177) ? 2339 : 1654;
 $height = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($page >= 165 && $page <= 177) ? 1654 : 2339;
-echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto;'>";
+    // first image has 3 rem margin-top
+    if ($page == 1) {
+        echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto; margin-top: 3rem;'>";
+    } else {
+        echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto;'>";
+    }
 ?>
 <?php
 }
@@ -219,7 +224,6 @@ echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' 
 </script>
 
 <style>
-
 img {
   width: 100%;
   background: var(--bg4);
@@ -237,14 +241,14 @@ img {
 
 #zoom-container {
   position: absolute;
-  top: 3rem;
+  top: 0;
   left: 0;
   touch-action: pan-x pan-y;
   transform-origin: 0 0;
   transition: transform 0.1s ease;
   width: fit-content;
   overflow: auto;
-  height: calc(100vh - 3rem);
+  height: 100vh;
   width: 100%;
   -webkit-overflow-scrolling: touch;
 }
