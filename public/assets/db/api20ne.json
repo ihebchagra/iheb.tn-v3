@@ -8,7 +8,7 @@
     },
     {
       "key": "TRP",
-      "label": "Indole",
+      "label": "Tryptophane",
       "posClass": "red",
       "negClass": "gray"
     },
@@ -32,7 +32,7 @@
     },
     {
       "key": "ESC",
-      "label": "Esculin",
+      "label": "Esculine",
       "posClass": "black",
       "negClass": "gray"
     },
@@ -123,7 +123,7 @@
     {
       "key": "OX",
       "label": "Oxydase",
-      "posClass": "white",
+      "posClass": "blue",
       "negClass": "gray"
     }
   ],
