@@ -502,14 +502,6 @@ header > .dark-toggle {
   opacity: 1;
 }
 
-.dark-toggle:hover {
-  transform: rotate(10deg);
-}
-
-:root:has(#dark-toggle:checked) .dark-toggle:hover {
-  transform: rotate(-10deg);
-}
-
 .dark-toggle-checkbox {
   display: none;
 }
