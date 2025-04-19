@@ -46,7 +46,7 @@
         }
 
         htmx
-          .ajax("GET", "/offline?v=2", {
+          .ajax("GET", "/offline?v=3", {
             target: "#content",
             swap: "outerHTML scroll:top",
             select: "#content",
@@ -98,8 +98,6 @@
 })();
 
 // Add flag to track if the page was loaded directly
-isDirectPageLoad = true;
-
 // Update page title and URL based on content metadata
 function setMetaData() {
   window.scrollTo({
@@ -112,7 +110,7 @@ function setMetaData() {
   document.title = metadataElement.innerText;
   const currentPath = window.location.pathname;
 
-  if (currentPath !== "/guide/viewer" && window.location.hash) {
+  if (currentPath !== "/casfm-viewer" && window.location.hash) {
     history.replaceState(
       { url: window.location.pathname },
       document.title,
@@ -121,32 +119,12 @@ function setMetaData() {
   }
 
   let href = metadataElement.getAttribute("href");
-  if (currentPath === "/guide/viewer") {
-    href += window.location.hash;
-    if (window.location.hash) {
-      localStorage.setItem("currentGuideId", window.location.hash.substring(1));
-    }
-  } else {
-    href = href.split("#")[0];
-  }
+  href += window.location.hash;
 
-  // Only push new state if the URL is actually changing
   if (href !== currentPath) {
-    // Use replaceState for /guide/viewer with a hash
-    if (currentPath === "/guide/viewer" && window.location.hash) {
-      history.replaceState({ url: href }, document.title, href);
-    } else {
       history.pushState({ url: href }, document.title, href);
-    }
   }
   logPageView(href);
-
-  if (isDirectPageLoad) {
-    localStorage.removeItem("previousUrl");
-    isDirectPageLoad = false;
-  } else if (currentPath !== "/guide/viewer" && currentPath !== href) {
-    localStorage.setItem("previousUrl", currentPath);
-  }
 
   const isIphone = /iPhone/i.test(navigator.userAgent);
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches;

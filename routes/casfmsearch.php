@@ -1,4 +1,4 @@
-<div style="display: none;" href="/casfmsearch" id="metadata">CA-SFM Search - iheb.tn</div>
+<div style="display: none;" href="/casfmsearch<?= $_GET['q'] ? '?q=' . $_GET['q'] : '' ?>" id="metadata">CA-SFM Search - iheb.tn</div>
 
 <h1>CA-SFM Search</h1>
 
@@ -24,21 +24,21 @@
         <ul class="toc-list">
             <template x-for="(chapter, c_idx) in tocData" :key="'c'+c_idx">
                 <li>
-                    <a :href="'/viewer?page=' + chapter.page" class="toc-link toc-chapter">
+                    <a x-bind:hx-get="'/casfm-viewer?p=' + chapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-chapter">
                         <strong x-text="chapter.title + (chapter.page ? ` (p. ${chapter.page})` : '')"></strong>
                     </a>
                     <template x-if="chapter.subchapters && chapter.subchapters.length > 0">
                         <ul class="toc-sub-list">
                             <template x-for="(subchapter, sc_idx) in chapter.subchapters" :key="'sc'+c_idx+sc_idx">
                                 <li>
-                                    <a :href="'/viewer?page=' + subchapter.page" class="toc-link toc-subchapter">
+                                    <a x-bind:hx-get="'/casfm-viewer?p=' + subchapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subchapter">
                                         <span x-text="subchapter.title + (subchapter.page ? ` (p. ${subchapter.page})` : '')"></span>
                                     </a>
                                     <template x-if="subchapter.subsections && subchapter.subsections.length > 0">
                                         <ul class="toc-sub-sub-list">
                                             <template x-for="(subsection, ssc_idx) in subchapter.subsections" :key="'ssc'+c_idx+sc_idx+ssc_idx">
                                                 <li>
-                                                    <a :href="'/viewer?page=' + subsection.page" class="toc-link toc-subsection">
+                                                    <a x-bind:hx-get="'/casfm-viewer?p=' + subsection.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subsection">
                                                         <span x-text="subsection.title + (subsection.page ? ` (p. ${subsection.page})` : '')"></span>
                                                     </a>
                                                 </li>
@@ -74,7 +74,7 @@
         <!-- Results list section -->
         <template x-for="result in searchResults.slice(0, 100)" :key="result.rowid">
             <!-- Make the entire item a clickable link -->
-            <a :href="'/viewer?page=' + result.page" class="result-item-link">
+            <a x-bind:hx-get="'/casfm-viewer?q=' + searchTerm + '&p=' + result.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="result-item-link">
                 <div class="result-item-content">
                     <!-- Header: Page Number -->
                     <div class="result-header">
@@ -124,7 +124,7 @@
             dbLoaded: false,
             db: null,
             SQL: null, // Will be assigned from global initSqlJs
-            searchTerm: "",
+            searchTerm: "<?= $_GET['q'] ?>",
             lastSearchedTerm: "",
             searchResults: [],
             searchError: null,
@@ -213,6 +213,13 @@
 
                     this.updateStatus("Prêt !", 100);
                     this.isLoading = false;
+                    // if searchTerm is not empty, perform search
+                    if (this.searchTerm.trim()) {
+                        this.performSearch();
+                    }
+                    this.$nextTick(() => {
+                      htmx.process(document.body);
+                    });
                 } catch (err) {
                     this.updateStatus(`Erreur : ${err.message}.`, 0);
                     this.isLoading = false;
@@ -372,6 +379,9 @@
                     this.searchResults = [];
                 } finally {
                     this.searchInProgress = false;
+                    this.$nextTick(() => {
+                      htmx.process(document.body);
+                    });
                 }
             },
 

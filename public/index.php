@@ -66,7 +66,7 @@ header('Pragma: no-cache');
             });
         }
     </script>
-    <link rel="prefetch" href="/offline?v=2">
+    <link rel="prefetch" href="/offline?v=3">
     <!-- Preload -->
     <link ref="prefetch" href='/assets/db/api20e.json?v=7'>
     <link ref="prefetch" href='/assets/db/api20ne.json?v=10'>
