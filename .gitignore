@@ -4,3 +4,4 @@ tests/
 sync.sh
 config.php
 todo.md
+*.sqlite
