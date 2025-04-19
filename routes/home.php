@@ -13,7 +13,7 @@
 <h2>Mes Projets</h2>
 <h3>💊 <a hx-get="/medicasearch" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Médicasearch</a></h3>
 <p>Un moteur de recherche des médicaments disponibles en tunisie avec toutes leurs informations.</p>
-<h3>🦠 <a hx-get="/eucast" hx-target="#content" hx-swap="outerHTML" hx-select="#content">CA-SFM Search</a></h3>
+<h3>🦠 <a hx-get="/casfmsearch" hx-target="#content" hx-swap="outerHTML" hx-select="#content">CA-SFM Search</a></h3>
 <p>Un moteur de recherche pour accéder rapidement aux dernières recommendation du CA-SFM.</p>
 <h3>🧪 <a hx-get="/apicalcul" hx-target="#content" hx-swap="outerHTML" hx-select="#content">APIcalcul</a></h3>
 <p>Un Calculateur de probabilité des résultats des tests API.</p>
@@ -21,8 +21,8 @@
 <p>Savoir la méthode de prélèvement, la quantité du prélèvement et le prix rapidement.</p>
 <h3>⚕️ <a href="https://promety.tn">Promety</a></h3>
 <p>Le Guide du Survivant, Survicalls, Survitools. Un projet révolutionnaire crée par l'association <b>AMENA</b>.</p>
-<h3>🚑 <a href="https://premiersecours.tn">premiersecours.tn</a></h3>
-<p>Un site complémentaire aux formations du Programme national de formation aux premiers secours en milieu scolaire.Direction par <b>Dr Mylène Ben Hamida</b> et Design du site par <b>Dr Mohamed Aziz Berriche</b>.</p>
+<!-- <h3>🚑 <a href="https://premiersecours.tn">premiersecours.tn</a></h3> -->
+<!-- <p>Un site complémentaire aux formations du Programme national de formation aux premiers secours en milieu scolaire.Direction par <b>Dr Mylène Ben Hamida</b> et Design du site par <b>Dr Mohamed Aziz Berriche</b>.</p> -->
 <h3>🎓 <a href="https://ecn.iheb.tn/">ECN tools</a> <span class='deprecated'>(N'est plus maintenu)</span></h3>
 <p> Polysearch ECN, Sériesearch et ECN 3al tayer. Des outils pour la préparation à l'épreuve de résidanat. <b>Dernière mise à jour mars 2024</b>.</p>
 <h3>📕 <a href="https://ihebchagra.github.io/polysearch">Polysearch FMT</a> <span class='deprecated'>(N'est plus maintenu)</span></h3>
