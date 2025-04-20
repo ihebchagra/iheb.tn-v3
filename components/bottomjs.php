@@ -183,24 +183,102 @@ window.addEventListener("popstate", function (e) {
 
 function logPageView(currentUrl) {
   const endpoint = '/view';
-
-  fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ url: currentUrl })
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  })
-  .then(data => {
-  })
-  .catch(error => {
-  });
+  const analyticsData = { url: currentUrl };
+  
+  // Check if online
+  if (navigator.onLine) {
+    // Send any stored analytics first
+    sendStoredAnalytics();
+    
+    // Then send current pageview
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(analyticsData)
+    })
+    .catch(error => {
+      // If fetch fails, store the analytics data
+      storeAnalyticsData('pageview', analyticsData);
+    });
+  } else {
+    // Offline, store the analytics data
+    storeAnalyticsData('pageview', analyticsData);
+  }
 }
+
+function logApiCalculation(data) {
+  const endpoint = '/apicalcul_analytics';
+  
+  // Check if online
+  if (navigator.onLine) {
+    // Send analytics
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    .catch(error => {
+      // If fetch fails, store the analytics data
+      storeAnalyticsData('apicalcul', data);
+    });
+  } else {
+    // Offline, store the analytics data
+    storeAnalyticsData('apicalcul', data);
+  }
+}
+
+function storeAnalyticsData(type, data) {
+  // Get existing stored analytics
+  let storedAnalytics = JSON.parse(localStorage.getItem('stored_analytics') || '[]');
+  
+  // Add new analytics data with type and timestamp
+  storedAnalytics.push({
+    type,
+    data,
+    timestamp: new Date().toISOString()
+  });
+  
+  // Store back to localStorage
+  localStorage.setItem('stored_analytics', JSON.stringify(storedAnalytics));
+}
+
+function sendStoredAnalytics() {
+  // Get stored analytics
+  const storedAnalytics = JSON.parse(localStorage.getItem('stored_analytics') || '[]');
+  if (storedAnalytics.length === 0) return;
+  
+  // Process each stored item
+  const remainingAnalytics = [];
+  
+  storedAnalytics.forEach(item => {
+    let endpoint = '';
+    if (item.type === 'pageview') endpoint = '/view';
+    else if (item.type === 'apicalcul') endpoint = '/apicalcul_analytics';
+    else return; // Unknown type, skip
+    
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item.data)
+    })
+    .catch(error => {
+      // Failed to send, keep in the remaining list
+      remainingAnalytics.push(item);
+    });
+  });
+  
+  // Update localStorage with remaining items
+  localStorage.setItem('stored_analytics', JSON.stringify(remainingAnalytics));
+}
+
+// Check for connection changes to sync analytics
+window.addEventListener('online', sendStoredAnalytics);
 
 function showIphoneInstallDialog() {
   document.documentElement.style.setProperty("--show-iphone-install", "block");

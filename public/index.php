@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($route) {
         case 'view':
         case 'analytics':
+        case 'apicalcul_analytics':
             require_once $_SERVER['DOCUMENT_ROOT'] . "/../api/$route.php";
             exit;
             break;

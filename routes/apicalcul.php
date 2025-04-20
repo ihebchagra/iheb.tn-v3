@@ -294,6 +294,22 @@
                     .filter(item => item.probability > 0.01) // Filter for probabilities over 1%
                     .sort((a, b) => b.probability - a.probability) // Sort in descending order
                     .slice(0, 5); // Take the top 5 results
+                
+                // Log analytics for this calculation
+                const analyticsData = {
+                    db_type: this.selectedDb,
+                    profile: Object.fromEntries(
+                        Object.entries(this.profile).filter(([_, v]) => v !== null)
+                    ),
+                    results: this.results.map(r => ({
+                        taxon: r.taxon,
+                        probability: r.probability
+                    }))
+                };
+                
+                if (window.logApiCalculation) {
+                    window.logApiCalculation(analyticsData);
+                }
             }
         };
     };
