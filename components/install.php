@@ -51,15 +51,10 @@
   getBrowser() { 
     return this.isAppleDevice ? 'Safari' : 'Chrome'; 
   },
-  getDeviceType() {
-    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return 'iPhone';
-    else if (this.isAppleDevice) return 'Mac';
-    else return 'Android';
-  }
 }">
   <div class="install-text">
     <div class="other-text">
-      Ce site est installable hors ligne. Ouvrir <b><u>iheb.tn</u></b> sur <b x-text="getBrowser()"></b> pour <b x-text="getDeviceType()"></b>. Puis Tapez <b>Installer 📥</b>.
+      Ce site est installable hors ligne. Ouvrir <b><u>iheb.tn</u></b> sur <b x-text="getBrowser()"></b>. Puis Tapez <b>Installer 📥</b>.
     </div>
     <button
       x-init

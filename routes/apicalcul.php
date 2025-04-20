@@ -58,7 +58,7 @@
             <table class="results-table">
                 <thead>
                     <tr>
-                        <th>Bactérie</th>
+                        <th>Taxon</th>
                         <th>Probabilité</th>
                         <th>Typicité</th>
                         <th>Incompatibilités</th>
