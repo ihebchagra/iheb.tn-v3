@@ -46,10 +46,20 @@
     </button>
   </div>
 </div>
-<div class="other-dialog">
+<div class="other-dialog" x-data="{ 
+  isAppleDevice: /iPad|iPhone|iPod|Mac/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1),
+  getBrowser() { 
+    return this.isAppleDevice ? 'Safari' : 'Chrome'; 
+  },
+  getDeviceType() {
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return 'iPhone';
+    else if (this.isAppleDevice) return 'Mac';
+    else return 'Android';
+  }
+}">
   <div class="install-text">
     <div class="other-text">
-      Ce site est installable hors ligne. Ouvrir <b><u>www.iheb.tn</u></b> sur <b>Chrome</b> pour <b>Android ou Windows</b> ou sur <b>Safari</b> pour <b>Iphone</b>. Puis Tapez <b>Installer 📥</b>.
+      Ce site est installable hors ligne. Ouvrir <b><u>iheb.tn</u></b> sur <b x-text="getBrowser()"></b> pour <b x-text="getDeviceType()"></b>. Puis Tapez <b>Installer 📥</b>.
     </div>
     <button
       x-init
