@@ -40,10 +40,10 @@
 <h2>Contactez-moi</h2>
 <p>Je suis disponible pour discuter n'importe quel sujet.</p>
 <ul>
-    <li>E-mail : <a>ihebchagra@gmail.com</a></li>
-    <li>Github : <a>@ihebchagra</a></li>
-    <li>Facebook : <a>Iheb Chagra</a></li>
-    <li>Instagram : <a>@ihebchagra</a></li>
+    <li>E-mail : <a href="mailto:ihebchagra@gmail.com">ihebchagra@gmail.com</a></li>
+    <li>Github : <a href="https://github.com/ihebchagra">@ihebchagra</a></li>
+    <li>Facebook : <a href="https://www.facebook.com/iheb.chagra">Iheb Chagra</a></li>
+    <li>Instagram : <a href="https://www.instagram.com/ihebchagra">@ihebchagra</a></li>
 </ul>
 
 
