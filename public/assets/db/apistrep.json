@@ -3,7 +3,7 @@
     {
       "key": "VP",
       "label": "Voges-Proskauer",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "gray"
     },
     {
@@ -16,7 +16,7 @@
       "key": "ESC",
       "label": "Esculine",
       "posClass": "black",
-      "negClass": "orange"
+      "negClass": "gray"
     },
     {
       "key": "PYRA",
@@ -27,25 +27,25 @@
     {
       "key": "aGAL",
       "label": "α-Galactosidase",
-      "posClass": "orange",
+      "posClass": "purple",
       "negClass": "gray"
     },
     {
       "key": "BGUR",
       "label": "ß-Glucuronidase",
-      "posClass": "white",
+      "posClass": "blue",
       "negClass": "gray"
     },
     {
       "key": "BGAL",
       "label": "ß-Galactosidase",
-      "posClass": "red",
+      "posClass": "purple",
       "negClass": "gray"
     },
     {
       "key": "PAL",
       "label": "Phosphatase Alcaline",
-      "posClass": "red",
+      "posClass": "purple",
       "negClass": "gray"
     },
     {
@@ -58,7 +58,7 @@
       "key": "ADH",
       "label": "Arginine Dihydrolase",
       "posClass": "red",
-      "negClass": "orange"
+      "negClass": "yellow"
     },
     {
       "key": "RIB",
@@ -111,14 +111,14 @@
     {
       "key": "AMD",
       "label": "Amidon",
-      "posClass": "black",
-      "negClass": "yellow"
+      "posClass": "yellow",
+      "negClass": "red"
     },
     {
       "key": "GLYG",
       "label": "Glycogène",
-      "posClass": "black",
-      "negClass": "yellow"
+      "posClass": "yellow",
+      "negClass": "red"
     },
     {
       "key": "HEM",

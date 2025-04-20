@@ -45,19 +45,20 @@
     {
       "key": "TDA",
       "label": "TDA",
-      "posClass": "orange",
+      "posClass": "brown",
       "negClass": "yellow"
     },
+
     {
       "key": "IND",
       "label": "Indole",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "gray"
     },
     {
       "key": "VP",
       "label": "VP",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "gray"
     },
     {

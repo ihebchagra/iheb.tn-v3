@@ -33,25 +33,25 @@
     {
       "key": "TRE",
       "label": "Tréhalose",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "MAN",
       "label": "Mannitol",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "XLT",
       "label": "Xylitol",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "MEL",
       "label": "Mélibiose",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
@@ -75,43 +75,43 @@
     {
       "key": "RAF",
       "label": "Raffinose",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "XYL",
       "label": "Xylose",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "SAC",
       "label": "Saccharose",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "MDG",
       "label": "Méthyl-D-Glucopyranoside",
-      "posClass": "orange",
+      "posClass": "yellow",
       "negClass": "red"
     },
     {
       "key": "NAG",
       "label": "N-Acetyl-Glucosamine",
-      "posClass": "orange",
-      "negClass": "gray"
+      "posClass": "yellow",
+      "negClass": "red"
     },
     {
       "key": "ADH",
       "label": "Arginine Dihydrolase",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "yellow"
     },
     {
       "key": "URE",
       "label": "Urée",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "yellow"
     },
     {

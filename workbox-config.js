@@ -2,7 +2,7 @@ const revision = String(new Date().getTime());
 module.exports = {
   globDirectory: "public/",
   globPatterns: ["**/*.{woff,svg,webp,html,css,js,json}"],
-  globIgnores: ["assets/pdf/**", "static/**"],
+  globIgnores: ["assets/db/**", "assets/casfm-pages/**"],
   swDest: "public/sw.js",
   ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
   skipWaiting: true,

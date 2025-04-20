@@ -206,6 +206,9 @@ a {
   --show-install-iphone: none;
   --show-install-other: none;
   --show-install: none;
+
+  --pink: #d3869b;
+  --brown: #af3a03;
 }
 
 :root:has(#dark-toggle:checked) {
@@ -240,6 +243,9 @@ a {
   --aqua-dim: #689d6a;
   --gray-dim: #a89984;
   --orange-dim: #d65d0e;
+
+  --pink: #d3869b;
+  --brown: #af3a03;
 }
 
 body {

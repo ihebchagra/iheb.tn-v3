@@ -165,13 +165,13 @@
                 this.db = [];
                 this.profile = {};
                 let url = '';
-                if (key === 'api10s') url = '/assets/db/api10s.json';
-                else if (key === 'api20e') url = '/assets/db/api20e.json?v=7';
-                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=10';
-                else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=10';
+                if (key === 'api10s') url = '/assets/db/api10s.json?v=1';
+                else if (key === 'api20e') url = '/assets/db/api20e.json?v=12';
+                else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=12';
+                else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=13';
                 else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=15';
-                else if (key === 'apinh') url = '/assets/db/apinh.json?v=11';
-                else if (key === 'apistaph') url = '/assets/db/apistaph.json?v=12';
+                else if (key === 'apinh') url = '/assets/db/apinh.json?v=14';
+                else if (key === 'apistaph') url = '/assets/db/apistaph.json?v=14';
                 else if (key === 'id32c') url = '/assets/db/id32c.json?v=10';
                 else {
                     this.dbError = 'Base inconnue.';
@@ -490,13 +490,14 @@
         color: var(--bg);
     }
 
-    .toggle-group button.active.purple {
-        background: var(--purple);
+
+    .toggle-group button.active.pink {
+        background: var(--pink);
         color: var(--bg);
     }
 
-    .toggle-group button.active.purple {
-        background: var(--purple);
+    .toggle-group button.active.brown {
+        background: var(--brown);
         color: var(--bg);
     }
 
@@ -615,66 +616,5 @@
         color: var(--fg4);
         margin-bottom: 1rem;
         text-align: center;
-    }
-
-    /* Test result colors */
-    .yellow {
-        color: var(--yellow);
-        font-weight: bold;
-    }
-
-    .green {
-        color: var(--green);
-        font-weight: bold;
-    }
-
-    .red {
-        color: var(--red);
-        font-weight: bold;
-    }
-
-    .blue {
-        color: var(--blue);
-        font-weight: bold;
-    }
-
-    .aqua {
-        color: var(--aqua);
-        font-weight: bold;
-    }
-
-    .gray {
-        color: var(--gray);
-        font-weight: bold;
-    }
-
-    .black {
-        color: black;
-        font-weight: bold;
-    }
-
-    .white {
-        color: white;
-        font-weight: bold;
-    }
-
-    .orange {
-        color: var(--orange);
-        font-weight: bold;
-    }
-
-    .purple {
-        color: var(--purple);
-        font-weight: bold;
-    }
-
-    .brown {
-        color: var(--brown);
-        font-weight: bold;
-    }
-
-    .brown {
-        color: var(--pink);
-        font-weight: bold;
     }
 </style>

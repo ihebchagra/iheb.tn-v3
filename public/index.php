@@ -55,7 +55,7 @@ header('Pragma: no-cache');
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Local Deps -->
-    <link rel="stylesheet" href="/styles.css?v=863">
+    <link rel="stylesheet" href="/styles.css?v=867">
     <script src="/assets/wasm/sql-wasm.js"></script>
     <?= $headerjs ?>
     <script>
@@ -69,12 +69,13 @@ header('Pragma: no-cache');
     </script>
     <link rel="prefetch" href="/offline?v=3">
     <!-- Preload -->
-    <link ref="prefetch" href='/assets/db/api20e.json?v=7'>
-    <link ref="prefetch" href='/assets/db/api20ne.json?v=10'>
-    <link ref="prefetch" href='/assets/db/apistrep.json?v=10'>
+    <link ref="prefetch" href='/assets/db/api10s.json?v=1'>
+    <link ref="prefetch" href='/assets/db/api20e.json?v=12'>
+    <link ref="prefetch" href='/assets/db/api20ne.json?v=12'>
+    <link ref="prefetch" href='/assets/db/apistrep.json?v=13'>
     <link ref="prefetch" href='/assets/db/apicoryne.json?v=15'>
-    <link ref="prefetch" href='/assets/db/apinh.json?v=11'>
-    <link ref="prefetch" href='/assets/db/apistaph.json?v=12'>
+    <link ref="prefetch" href='/assets/db/apinh.json?v=14'>
+    <link ref="prefetch" href='/assets/db/apistaph.json?v=14'>
     <link ref="prefetch" href='/assets/db/id32c.json?v=10'>
     <link rel="prefetch" href="/assets/db/medicaments_fts.db">
     <link rel="prefetch" href="/assets/db/casfm_fts5.db?v=3">

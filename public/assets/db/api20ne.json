@@ -21,12 +21,12 @@
     {
       "key": "ADH",
       "label": "Arginine",
-      "posClass": "orange",
+      "posClass": "red",
       "negClass": "yellow"
     },
     {
       "key": "URE",
-      "label": "Urea",
+      "label": "Urée",
       "posClass": "red",
       "negClass": "yellow"
     },

@@ -51,13 +51,13 @@
     {
       "key": "TDA",
       "label": "TDA",
-      "posClass": "orange",
+      "posClass": "brown",
       "negClass": "gray"
     },
     {
       "key": "IND",
       "label": "Indole",
-      "posClass": "purple",
+      "posClass": "red",
       "negClass": "gray"
     },
     {

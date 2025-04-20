@@ -3,7 +3,7 @@
 # ----------------------
 # Setup: File monitoring initialization
 echo "Setting up file monitoring with inotify..."
-find public routes -type f \( -name "*.html" -o -name "*.php" -o -name "*.js" \) > /tmp/files_to_check.txt
+find public routes -type f \( -name "*.html" -o -name "*.php" -o -name "*.js" -o -name "*.json" \) > /tmp/files_to_check.txt
 if [ -f "./index.php" ]; then
     echo "./index.php" >> /tmp/files_to_check.txt
 fi
