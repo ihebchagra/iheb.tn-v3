@@ -4,8 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// TODO : donate page that is not necessarily accessible, backwards compat
-$get_routes = ['home', 'offline', 'ecn', 'ecn/polysearch', 'ecn/seriesearch', 'ecn/ecn3altayer', 'medicasearch', 'donate', 'apicalcul', 'casfmsearch', 'casfm-viewer','prelevements'];
+$get_routes = ['home', 'offline', 'ecn', 'ecn/polysearch', 'ecn/seriesearch', 'ecn/ecn3altayer', 'medicasearch',  'apicalcul', 'casfmsearch', 'casfm-viewer','prelevements'];
 $post_routes = ['view', 'apicalcul_analytics'];
 
 $request_method = $_SERVER['REQUEST_METHOD'];
@@ -15,6 +14,26 @@ $requested_route = substr($requested_route, 1);
 $requested_route = rtrim($requested_route, '/');
 $requested_route = $requested_route === '' ? 'home' : $requested_route;
 $route = $requested_route;
+
+// Backwards compatibility for v2 routes : we will just redirect to the new routes / websites
+if ($requested_route === 'donate') {
+    header('Location: https://gateway.konnect.network/me/66d518dc0e581535c3cdfb0d');
+    exit();
+}
+if (substr($requested_route, 0, 3) === 'ecn') {
+    header('Location: https://ecn.iheb.tn/' . $requested_route);
+    exit();
+}
+if ($requested_route === 'polysearchfmt') {
+    header('Location: https://ihebchagra.github.io/polysearch');
+    exit();
+}
+if ($requested_route === 'medicavet') {
+    header('Location: https://ihebchagra.github.io/medicavet');
+    exit();
+}
+
+
 
 switch ($request_method) {
     case 'POST':

@@ -14,6 +14,10 @@ upload:
 	@echo "Uploading to testing..."
 	@./sync.sh
 
+dl_analytics:
+	@echo "Downloading analytics.sqlite from FTP server..."
+	@./sync.sh download_analytics
+
 # commit:
 # 	@echo "Uploading to prod..."
 # 	@./sync_v2.sh /promety.tn/
@@ -23,4 +27,4 @@ dev:
 	@$(MAKE) server &
 	@$(MAKE) bump
 
-.PHONY: server sw bump upload commit
+.PHONY: server sw bump upload commit dl_analytics

@@ -48,7 +48,7 @@ header('Pragma: no-cache');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="manifest" href="/assets/pwa/site.webmanifest?v=21">
+    <link rel="manifest" href="/assets/pwa/site.webmanifest?v=22">
     <link rel="shortcut icon" href="/assets/pwa/favicon.ico?v=3" type="image/x-icon">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
@@ -78,6 +78,7 @@ header('Pragma: no-cache');
     <link ref="prefetch" href='/assets/db/id32c.json?v=10'>
     <link rel="prefetch" href="/assets/db/medicaments_fts.db">
     <link rel="prefetch" href="/assets/db/casfm_fts5.db?v=3">
+    <link rel="prefetch" href="/assets/db/prelevements.db?v=1">
 </head>
 
 <body>

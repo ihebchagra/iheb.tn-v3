@@ -16,5 +16,11 @@
   ],
   "theme_color": "#8f3f71",
   "background_color": "#fbf1c7",
-  "display": "standalone"
+  "display": "standalone",
+  "id": "tn.iheb",
+  "description": "Le site personnel d'Iheb Chagra",
+  "lang": "fr",
+  "dir": "ltr",
+  "scope": "https://iheb.tn",
+  "categories": ["education", "medical"]
 }
