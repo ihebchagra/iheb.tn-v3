@@ -76,7 +76,7 @@ header('Pragma: no-cache');
     <link ref="prefetch" href='/assets/db/apistaph.json?v=12'>
     <link ref="prefetch" href='/assets/db/id32c.json?v=10'>
     <link rel="prefetch" href="/assets/db/medicaments_fts.db">
-    <link rel="prefetch" href="/assets/db/casfm_fts5.db">
+    <link rel="prefetch" href="/assets/db/casfm_fts5.db?v=3">
 </head>
 
 <body>
