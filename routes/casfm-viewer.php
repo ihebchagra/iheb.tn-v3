@@ -1,20 +1,7 @@
-<?php
-$metadata = '/casfm-viewer';
-$queryParams = [];
-if (isset($_GET['p'])) {
-    $queryParams[] = 'p=' . $_GET['p'];
-}
-if (isset($_GET['q'])) {
-    $queryParams[] = 'q=' . $_GET['q'];
-}
-if (!empty($queryParams)) {
-    $metadata .= '?' . implode('&', $queryParams);
-}
-echo '<div style="display: none;" href="' . $metadata . '" id="metadata">CA-SFM Search - iheb.tn</div>';
-?>
+<div style="display: none;" href="/casfm-viewer" id="metadata">CA-SFM Search - iheb.tn</div>
 
 <!-- go back button : if q is set, go to search page, set hx-get to ?q=, else go to viewer page -->
-<button id="go-back" hx-get="<?php if (isset($_GET['q'])) { echo '/casfmsearch?q=' . $_GET['q']; } else { echo '/casfmsearch'; } ?>" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Retour</button>
+<button id="go-back" hx-get="/casfmsearch" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Retour</button>
 <div id="zoom-container">
   <div id="zoom-inner">
     <div id='pages-container'>
@@ -48,8 +35,15 @@ $height = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($p
         if (window.location.pathname !== '/casfm-viewer') return;
         const controller = document.getElementById('guide-navigation-controller');
         if (!controller) return;
-        // get targetId from p param in url, keep in mind there are multiple params, use searchParams
-        const searchParams = new URLSearchParams(window.location.search);
+        let searchParams = new URLSearchParams(window.hash || window.location.hash.replace('#', ''));
+        let retourElement = document.getElementById('go-back');
+        if (retourElement) {
+          if (searchParams.get('q')) {
+            retourElement.setAttribute('hx-get', '/casfmsearch#q=' + searchParams.get('q'));
+          } else {
+            retourElement.setAttribute('hx-get', '/casfmsearch');
+          }
+        }
         let targetId = searchParams.get('p');
         if (targetId) {
           const element = document.getElementById(targetId);
@@ -73,7 +67,6 @@ $height = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($p
 
       function handlePageTransition(evt) {
         if (isOnGuideViewer() && evt.detail.pathInfo && evt.detail.pathInfo.requestPath !== '/guide/viewer') {
-          localStorage.removeItem('currentGuideId');
           window.guideNavigationInitialized = false;
         }
       }

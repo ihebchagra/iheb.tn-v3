@@ -1,4 +1,6 @@
 <script>
+window.hash = '';
+
 (function () {
   if (window.progressBarInitialized) return;
   window.progressBarInitialized = true;
@@ -95,10 +97,21 @@
   window.addEventListener("htmx:timeout", window.progressBarHandlers.error);
   window.addEventListener("htmx:swapError", window.progressBarHandlers.error);
   window.addEventListener("htmx:xhr:abort", window.progressBarHandlers.abort);
+
+  // before an htmx request, check if the requested url has a hash, if it does save it to localStorage
+  window.addEventListener("htmx:beforeRequest", function (event) {
+    window.hash = '';
+    const url = event.detail.pathInfo.requestPath;
+    const hash = url.split("#")[1];
+    if (hash) {
+      window.hash = hash;
+    }
+  });
 })();
 
 // Add flag to track if the page was loaded directly
 // Update page title and URL based on content metadata
+//
 function setMetaData() {
   window.scrollTo({
     top: 0,
@@ -110,20 +123,18 @@ function setMetaData() {
   document.title = metadataElement.innerText;
   const currentPath = window.location.pathname;
 
-  if (currentPath !== "/casfm-viewer" && window.location.hash) {
-    history.replaceState(
-      { url: window.location.pathname },
-      document.title,
-      window.location.href.split("#")[0]
-    );
-  }
-
   let href = metadataElement.getAttribute("href");
-  href += window.location.hash;
-
-  if (href !== currentPath) {
-      history.pushState({ url: href }, document.title, href);
+  // if path is /casfm-viewer or /casfmsearch
+  if (href.includes('/casfm-viewer') || href.includes('/casfmsearch')) {
+    hash = window.hash || window.location.hash.replace('#', '');
+  } else {
+    hash = window.hash;
   }
+  if (hash) {
+    href = href + '#' + hash;
+  }
+  history.pushState({ url: href }, document.title, href);
+
   logPageView(href);
 
   const isIphone = /iPhone/i.test(navigator.userAgent);
@@ -132,21 +143,9 @@ function setMetaData() {
   if (isIphone && !isStandalone) {
     window.installType = "iphone";
     document.documentElement.style.setProperty("--show-install", "block");
-    if (!JSON.parse(localStorage.getItem("never_show"))) {
-      document.documentElement.style.setProperty(
-        "--show-install-banner",
-        "flex"
-      );
-    }
   } else if (window.installEvent !== undefined) {
     if (!isStandalone) {
       document.documentElement.style.setProperty("--show-install", "block");
-      if (!JSON.parse(localStorage.getItem("never_show"))) {
-        document.documentElement.style.setProperty(
-          "--show-install-banner",
-          "flex"
-        );
-      }
     }
   } else {
     window.addEventListener("beforeinstallprompt", (event) => {
@@ -154,12 +153,6 @@ function setMetaData() {
 
       if (!isStandalone) {
         document.documentElement.style.setProperty("--show-install", "block");
-        if (!JSON.parse(localStorage.getItem("never_show"))) {
-          document.documentElement.style.setProperty(
-            "--show-install-banner",
-            "flex"
-          );
-        }
         window.installEvent = event;
         window.installType = "android";
       }

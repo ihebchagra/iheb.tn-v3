@@ -1,4 +1,4 @@
-<div style="display: none;" href="/casfmsearch<?= $_GET['q'] ? '?q=' . $_GET['q'] : '' ?>" id="metadata">CA-SFM Search - iheb.tn</div>
+<div style="display: none;" href="/casfmsearch" id="metadata">CA-SFM Search - iheb.tn</div>
 
 <h1>🦠 CA-SFM Search</h1>
 
@@ -14,7 +14,7 @@
 
     <!-- Search UI (Shown after loading) -->
     <div x-show="dbLoaded" class="search-ui-section" x-transition>
-        <input type="search" id="search-term-input" placeholder="Rechercher les recommendations..." x-model="searchTerm" @keydown.enter="performSearch()" @input="handleInput()" class="search-input" aria-label="Terme de recherche" />
+        <input @change=performSearch() type="search" id="search-term-input" placeholder="Rechercher les recommendations..." x-model="searchTerm" @keydown.enter="performSearch()" @input="handleInput()" class="search-input" aria-label="Terme de recherche" />
         <button @click="performSearch()" class="search-button" :disabled="isLoading || !searchTerm.trim()" aria-label="Effectuer la recherche">Rechercher</button>
     </div>
 
@@ -24,21 +24,21 @@
         <ul class="toc-list">
             <template x-for="(chapter, c_idx) in tocData" :key="'c'+c_idx">
                 <li>
-                    <a x-bind:hx-get="'/casfm-viewer?p=' + chapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-chapter">
+                    <a x-bind:hx-get="'/casfm-viewer#p=' + chapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-chapter">
                         <strong x-text="chapter.title + (chapter.page ? ` (p. ${chapter.page})` : '')"></strong>
                     </a>
                     <template x-if="chapter.subchapters && chapter.subchapters.length > 0">
                         <ul class="toc-sub-list">
                             <template x-for="(subchapter, sc_idx) in chapter.subchapters" :key="'sc'+c_idx+sc_idx">
                                 <li>
-                                    <a x-bind:hx-get="'/casfm-viewer?p=' + subchapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subchapter">
+                                    <a x-bind:hx-get="'/casfm-viewer#p=' + subchapter.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subchapter">
                                         <span x-text="subchapter.title + (subchapter.page ? ` (p. ${subchapter.page})` : '')"></span>
                                     </a>
                                     <template x-if="subchapter.subsections && subchapter.subsections.length > 0">
                                         <ul class="toc-sub-sub-list">
                                             <template x-for="(subsection, ssc_idx) in subchapter.subsections" :key="'ssc'+c_idx+sc_idx+ssc_idx">
                                                 <li>
-                                                    <a x-bind:hx-get="'/casfm-viewer?p=' + subsection.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subsection">
+                                                    <a x-bind:hx-get="'/casfm-viewer#p=' + subsection.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="toc-link toc-subsection">
                                                         <span x-text="subsection.title + (subsection.page ? ` (p. ${subsection.page})` : '')"></span>
                                                     </a>
                                                 </li>
@@ -74,7 +74,7 @@
         <!-- Results list section -->
         <template x-for="result in searchResults.slice(0, 100)" :key="result.rowid">
             <!-- Make the entire item a clickable link -->
-            <a x-bind:hx-get="'/casfm-viewer?q=' + searchTerm + '&p=' + result.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="result-item-link">
+            <a x-bind:hx-get="'/casfm-viewer#q=' + searchTerm + '&p=' + result.page" hx-target="#content" hx-swap="outerHTML" hx-select="#content" class="result-item-link">
                 <div class="result-item-content">
                     <!-- Header: Page Number -->
                     <div class="result-header">
@@ -116,6 +116,8 @@
 // Ensure Alpine and initSqlJs are available globally before this runs
 
 function casfmSearchApp() {
+    let searchParams = new URLSearchParams(window.hash || window.location.hash.replace('#', ''));
+    let qsearchTerm = searchParams.get('q') || '';
     return {
         // State Variables
         isLoading: true,
@@ -124,7 +126,7 @@ function casfmSearchApp() {
         dbLoaded: false,
         db: null,
         SQL: null, // Will be assigned from global initSqlJs
-        searchTerm: "<?= $_GET['q'] ?>",
+        searchTerm: qsearchTerm,
         lastSearchedTerm: "",
         searchResults: [],
         searchError: null,
