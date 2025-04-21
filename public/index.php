@@ -72,7 +72,7 @@ header('Pragma: no-cache');
     <link ref="prefetch" href='/assets/db/api10s.json?v=1'>
     <link ref="prefetch" href='/assets/db/api20e.json?v=12'>
     <link ref="prefetch" href='/assets/db/api20ne.json?v=12'>
-    <link ref="prefetch" href='/assets/db/apistrep.json?v=13'>
+    <link ref="prefetch" href='/assets/db/apistrep.json?v=14'>
     <link ref="prefetch" href='/assets/db/apicoryne.json?v=15'>
     <link ref="prefetch" href='/assets/db/apinh.json?v=14'>
     <link ref="prefetch" href='/assets/db/apistaph.json?v=14'>

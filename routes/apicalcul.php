@@ -59,9 +59,10 @@
                 <thead>
                     <tr>
                         <th>Taxon</th>
-                        <th>Probabilité</th>
-                        <th>Typicité</th>
+                        <th>% ID</th>
                         <th>Incompatibilités</th>
+                        <th>T Index</th>
+                        <th>Qualité</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,10 +70,7 @@
                         <tr>
                             <td x-text="res.taxon"></td>
                             <td>
-                                <b><span x-text="(res.probability * 100).toFixed(1) + '%'"></span></b>
-                            </td>
-                            <td>
-                                <span x-text="(res.typicite * 100).toFixed(1) + '%'"></span>
+                                <b><span x-text="res.percentId.toFixed(1) + '%'"></span></b>
                             </td>
                             <td>
                                 <template x-if="res.incompatibilites.length > 0">
@@ -89,14 +87,20 @@
                                     <span>—</span>
                                 </template>
                             </td>
+                            <td>
+                                <span x-text="res.tIndex.toFixed(2)"></span>
+                            </td>
+                            <td>
+                                <span x-text="res.quality"></span>
+                            </td>
                         </tr>
                     </template>
                 </tbody>
             </table>
         </div>
-        <!--<div class="legend">
-            <b>Légende :</b> Probabilité = chance relative, Typicité = adéquation au profil, Incompatibilité = tests incompatibles.
-        </div>-->
+        <div class="legend">
+            <b>Légende :</b> %ID = pourcentage d'identification, T Index = indice de typicité, Qualité = fiabilité de l'identification
+        </div>
     </div>
 </div>
 
@@ -168,7 +172,7 @@
                 if (key === 'api10s') url = '/assets/db/api10s.json?v=1';
                 else if (key === 'api20e') url = '/assets/db/api20e.json?v=12';
                 else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=12';
-                else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=13';
+                else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=14';
                 else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=15';
                 else if (key === 'apinh') url = '/assets/db/apinh.json?v=14';
                 else if (key === 'apistaph') url = '/assets/db/apistaph.json?v=14';
@@ -242,58 +246,147 @@
             calculate() {
                 const profile = this.profile;
                 const db = this.db;
-                const probs = db.map(bacterium => {
-                    let product = 1;
-                    let pTypicite = 1;
+                
+                // Constants for reading errors
+                const ALPHA_POSITIVE = 0.001; // α+ = 10^-3
+                const ALPHA_NEGATIVE = 0.01;  // α- = 10^-2
+                const S = 0.01; // S value for T index calculation (10^-2)
+                
+                // Calculate frequency of occurrence for each taxon
+                const taxaResults = db.map(taxon => {
+                    let poFrequency = 1; // Frequency of occurrence for observed profile
+                    let ptFrequency = 1; // Frequency of most typical profile
+                    const incompatibilities = [];
+                    
+                    // Process each test in the profile
                     for (const [test, expected] of Object.entries(profile)) {
-                        const value = bacterium[test];
-                        if (value === undefined || expected === null) continue;
-                        if (value < 50) {
-                            pTypicite *= 100 - value;
-                        } else {
-                            pTypicite *= value;
-                        }
+                        const percentPositive = taxon[test];
+                        if (percentPositive === undefined || expected === null) continue;
+                        
+                        // Calculate P+ and P-
+                        const pPositive = percentPositive / 100;
+                        const pNegative = 1 - pPositive;
+                        
+                        // Calculate frequency based on observed reaction
+                        let reactionFrequency;
                         if (expected === "+") {
-                            product *= value === 0 ? 1 : value;
-                        } else if (expected === "-") {
-                            product *= value === 100 ? 1 : (100 - value);
+                            // F+ = P+ (1 - α+) + (α+ × P-)
+                            reactionFrequency = pPositive * (1 - ALPHA_POSITIVE) + (ALPHA_POSITIVE * pNegative);
                         } else {
-                            product *= 1;
+                            // F- = P- (1 - α-) + (α- × P+)
+                            reactionFrequency = pNegative * (1 - ALPHA_NEGATIVE) + (ALPHA_NEGATIVE * pPositive);
+                        }
+                        
+                        // Multiply to get overall frequency for observed profile
+                        poFrequency *= reactionFrequency;
+                        
+                        // Calculate most typical reaction frequency (+ when ≥50%, - when <50%)
+                        const typicalFrequency = (percentPositive >= 50) 
+                            ? pPositive * (1 - ALPHA_POSITIVE) + (ALPHA_POSITIVE * pNegative)
+                            : pNegative * (1 - ALPHA_NEGATIVE) + (ALPHA_NEGATIVE * pPositive);
+                        
+                        // Multiply to get overall frequency for most typical profile
+                        ptFrequency *= typicalFrequency;
+                        
+                        // Check for tests against identification (frequency < 0.25)
+                        if (reactionFrequency < 0.25) {
+                            incompatibilities.push({
+                                test,
+                                expected,
+                                actual: percentPositive
+                            });
                         }
                     }
+                    
                     return {
-                        taxon: bacterium.Taxon,
-                        raw: product,
-                        pTypicite: pTypicite,
-                        bacterium
+                        taxon: taxon.Taxon,
+                        poFrequency,
+                        ptFrequency,
+                        modalFrequency: poFrequency / ptFrequency,  // Fm = Po/Pt
+                        incompatibilites: incompatibilities,
+                        bacterium: taxon
                     };
                 });
-                const total = probs.reduce((sum, p) => sum + p.raw, 0) || 1;
-                this.results = probs.map(p => {
-                        const incompatibilites = [];
-                        for (const [test, expected] of Object.entries(profile)) {
-                            const value = p.bacterium[test];
-                            if (value === undefined || expected === null) continue;
-                            if ((value < 25 && expected === "+") || (value > 75 && expected === "-")) {
-                                incompatibilites.push({
-                                    test,
-                                    expected,
-                                    actual: value
-                                });
-                            }
-                        }
-                        return {
-                            taxon: p.taxon,
-                            probability: (p.raw / total) || 0,
-                            typicite: (
-                                (Math.log((p.raw || 0.000001) / (p.pTypicite || 0.000001)) - Math.log(0.000001)) / -Math.log(0.000001)
-                            ),
-                            incompatibilites
-                        };
-                    })
-                    .filter(item => item.probability > 0.01) // Filter for probabilities over 1%
-                    .sort((a, b) => b.probability - a.probability) // Sort in descending order
-                    .slice(0, 5); // Take the top 5 results
+                
+                // Filter out taxa with extremely low frequencies
+                const validTaxa = taxaResults.filter(t => t.poFrequency > 0.000001);
+                
+                // Calculate total frequency for normalization
+                const totalFrequency = validTaxa.reduce((sum, t) => sum + t.poFrequency, 0) || 1;
+                
+                // Calculate %id and sort
+                validTaxa.forEach(taxon => {
+                    // Calculate percentage of identification
+                    taxon.percentId = (taxon.poFrequency / totalFrequency) * 100;
+                    
+                    // Calculate T index
+                    // T = (log Fm - log S) / -log S
+                    taxon.tIndex = Math.max(0, 
+                        (Math.log10(Math.max(taxon.modalFrequency, 0.000001)) - Math.log10(S)) / -Math.log10(S)
+                    );
+                });
+                
+                // Sort by decreasing %id
+                validTaxa.sort((a, b) => b.percentId - a.percentId);
+                
+                // Calculate ratios for first 4 taxa
+                for (let i = 0; i < Math.min(validTaxa.length - 1, 4); i++) {
+                    validTaxa[i].ratio = validTaxa[i].percentId / (validTaxa[i + 1].percentId || 0.01);
+                }
+                
+                // Find taxon with maximum ratio
+                let maxRatio = 0;
+                let maxRatioIndex = 0;
+                for (let i = 0; i < Math.min(validTaxa.length - 1, 4); i++) {
+                    if (validTaxa[i].ratio > maxRatio) {
+                        maxRatio = validTaxa[i].ratio;
+                        maxRatioIndex = i;
+                    }
+                }
+                
+                // Select taxa for identification (up to the maxRatioIndex)
+                const selectedTaxa = validTaxa.slice(0, maxRatioIndex + 1);
+                
+                // Add quality assessment for each selected taxon
+                selectedTaxa.forEach(taxon => {
+                    if (taxon.percentId >= 99.9 && taxon.tIndex >= 0.75) {
+                        taxon.quality = 'EXCELLENTE';
+                    } else if (taxon.percentId >= 99.0 && taxon.tIndex >= 0.50) {
+                        taxon.quality = 'TRÈS BONNE';
+                    } else if (taxon.percentId >= 90.0 && taxon.tIndex >= 0.25) {
+                        taxon.quality = 'BONNE';
+                    } else if (taxon.percentId >= 80.0 && taxon.tIndex >= 0) {
+                        taxon.quality = 'ACCEPTABLE';
+                    } else {
+                        taxon.quality = 'NON FIABLE';
+                    }
+                });
+                
+                // Handle special cases
+                const sumPercentId = selectedTaxa.reduce((sum, t) => sum + t.percentId, 0);
+                
+                // Check if multiple taxa from same genus - identification to genus level
+                // This would require taxonomy data not available in this example
+                
+                // Check if profile is "doubtful" or "unacceptable"
+                if (selectedTaxa.length === 0) {
+                    // Add a special result entry
+                    selectedTaxa.push({
+                        taxon: "PROFIL NON IDENTIFIABLE",
+                        percentId: 0,
+                        tIndex: 0,
+                        quality: "INACCEPTABLE",
+                        incompatibilites: []
+                    });
+                } else if (sumPercentId < 80.0) {
+                    // Update quality for all taxa
+                    selectedTaxa.forEach(taxon => {
+                        taxon.quality = 'NON FIABLE';
+                    });
+                }
+                
+                // Store selected taxa as results
+                this.results = selectedTaxa.slice(0, 5);  // Limit to top 5 taxa
                 
                 // Log analytics for this calculation
                 const analyticsData = {
@@ -303,7 +396,8 @@
                     ),
                     results: this.results.map(r => ({
                         taxon: r.taxon,
-                        probability: r.probability
+                        percentId: r.percentId,
+                        tIndex: r.tIndex
                     }))
                 };
                 
