@@ -2,7 +2,7 @@
 
 <h1>📶 Hors ligne</h1>
 
-<p>Vous êtes <b>hors ligne</b>. Veuillez vous reconnecter et rafraîchir la page. Sinone les pages que vous avez déja visitées seront disponibles en mode hors ligne.</p>
+<p>Vous êtes <b>hors ligne</b>. Veuillez vous reconnecter et rafraîchir la page. Sinon les pages que vous avez déja visitées seront disponibles en mode hors ligne.</p>
 
 <button hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Rafraîchir</button>
 
