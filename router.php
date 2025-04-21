@@ -17,7 +17,7 @@ $route = $requested_route;
 
 // Backwards compatibility for v2 routes : we will just redirect to the new routes / websites
 if ($requested_route === 'donate') {
-    header('Location: https://gateway.konnect.network/me/66d518dc0e581535c3cdfb0d');
+    header('Location: https://ba9chich.com/fr/ihebchagra');
     exit();
 }
 if (substr($requested_route, 0, 3) === 'ecn') {

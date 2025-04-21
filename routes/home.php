@@ -9,7 +9,7 @@
 <h2>À Propos</h2>
 <p><span x-init x-text="getGreeting()">Bonjour</span>! Je suis <b>Iheb Chagra</b>, médecin résident en microbiologie. Bienvenue sur mon site web personnel. Il contient plusieurs outils pour la pratique médicale. J'espère qu'il vous sera utile.</p>
 <h2>Offrez-moi un café ! ☕</h2>
-<p>Bien que ce site soit gratuit à tous et sans publicités, sa maintenance et son développement sont entièrement à ma charge, en temps et en argent. Si vous souhaitez soutenir mon travail, votre contribution serait grandement appréciée. <a href="https://gateway.konnect.network/me/66d518dc0e581535c3cdfb0d"><b>Faire un don sur ce lien</b></a></p>
+<p>Bien que ce site soit gratuit à tous et sans publicités, sa maintenance et son développement sont entièrement à ma charge, en temps et en argent. Si vous souhaitez soutenir mon travail, votre contribution serait grandement appréciée. <a href="https://ba9chich.com/fr/ihebchagra"><b>Faire un don sur ce lien</b></a></p>
 <h2>Mes Projets</h2>
 <h3>💊 <a hx-get="/medicasearch" hx-target="#content" hx-swap="outerHTML" hx-select="#content">Médicasearch</a></h3>
 <p>Un moteur de recherche des médicaments disponibles en tunisie avec toutes leurs informations.</p>
