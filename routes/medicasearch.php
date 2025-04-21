@@ -37,6 +37,7 @@
         @click.away="closeAutocomplete()"
         class="search-input"
         aria-label="Terme de recherche"
+        @change="performSearch()"
       >
 
       <!-- Autocomplete Dropdown -->
