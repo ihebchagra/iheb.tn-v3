@@ -1,0 +1,7 @@
+.php-cs-fixer.cache
+tests/
+sync.sh
+todo.md
+php.ini
+.ht*
+.git/

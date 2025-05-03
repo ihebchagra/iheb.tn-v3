@@ -10,13 +10,17 @@ sw:
 bump:
 	@./bump.sh
 
-upload:
-	@echo "Uploading to testing..."
-	@./sync.sh
+# upload:
+# 	@echo "Uploading to testing..."
+# 	@./sync.sh
 
 dl_analytics:
 	@echo "Downloading analytics.sqlite from FTP server..."
 	@./sync.sh download_analytics
+
+sync:
+	@echo "Syncing with remote server..."
+	@rsync -av --exclude-from='.rsyncignore' ./ iheb@ssh.iheb.tn:/var/www/iheb.tn/
 
 # commit:
 # 	@echo "Uploading to prod..."
@@ -27,4 +31,4 @@ dev:
 	@$(MAKE) server &
 	@$(MAKE) bump
 
-.PHONY: server sw bump upload commit dl_analytics
+.PHONY: server sw bump upload commit dl_analytics sync
