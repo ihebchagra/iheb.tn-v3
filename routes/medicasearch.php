@@ -22,7 +22,7 @@
     <span x-show="isLoading && loadingProgress === 0" class="loading-spinner" aria-hidden="true">⏳</span>
   </div>
 
-<!-- Search UI (Shown after loading) -->
+  <!-- Search UI (Shown after loading) -->
   <div x-show="dbLoaded" class="search-ui-section" x-transition>
     <div class="autocomplete-container">
       <input
@@ -98,9 +98,9 @@
         Avec Liens
       </button>
       <!--<span class="filter-count"
-        x-text="`(${filteredResults.length} affiché${filteredResults.length !== 1 ? 's' : ''})`"
-        aria-live="polite">
-      </span>-->
+x-text="`(${filteredResults.length} affiché${filteredResults.length !== 1 ? 's' : ''})`"
+aria-live="polite">
+</span>-->
     </div>
 
     <!-- Error Message -->
@@ -132,14 +132,14 @@
 
         <!-- Collapsible Content -->
         <div x-show="open" x-collapse class="result-details"
-             x-init="$nextTick(() => updateLastVisibleSection($el))"
-             @x-collapse:expanded="updateLastVisibleSection($el)">
+          x-init="$nextTick(() => updateLastVisibleSection($el))"
+          @x-collapse:expanded="updateLastVisibleSection($el)">
 
           <!-- Primary Information -->
           <div class="details-section"
-               x-show="result.DCI || result.Laboratoire"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.DCI || result.Laboratoire)">
+            x-show="result.DCI || result.Laboratoire"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.DCI || result.Laboratoire)">
             <template x-if="result.DCI">
               <div class="field-container field-dci">
                 <strong class="prop-label prop-label-dci">DCI:</strong>
@@ -156,9 +156,9 @@
 
           <!-- Pricing & CNAM Info -->
           <div class="details-section"
-               x-show="result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT)">
+            x-show="result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.PRIX_PUBLIC || result.TARIF_REFERENCE || result.CATEGORIE || result.AP || result.CODE_PCT)">
             <template x-if="result.PRIX_PUBLIC">
               <div class="field-container field-prix-public">
                 <strong class="prop-label prop-label-prix-public">Prix Public:</strong>
@@ -194,9 +194,9 @@
 
           <!-- Regulatory Details -->
           <div class="details-section"
-               x-show="result.AMM || result.Date_AMM || result.Tableau"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.AMM || result.Date_AMM || result.Tableau)">
+            x-show="result.AMM || result.Date_AMM || result.Tableau"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.AMM || result.Date_AMM || result.Tableau)">
             <template x-if="result.AMM">
               <div class="field-container field-amm">
                 <strong class="prop-label prop-label-amm">AMM:</strong>
@@ -219,9 +219,9 @@
 
           <!-- Formulation & Presentation -->
           <div class="details-section"
-               x-show="result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement)">
+            x-show="result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.Forme || result.Presentation || result.Duree_Conservation || result.Conditionnement_Primaire || result.Specification_Conditionnement)">
             <template x-if="result.Forme">
               <div class="field-container field-forme">
                 <strong class="prop-label prop-label-forme">Forme:</strong>
@@ -256,9 +256,9 @@
 
           <!-- Classification -->
           <div class="details-section"
-               x-show="result.Classe_Therapeutique || result.Sous_Classe_Therapeutique"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.Classe_Therapeutique || result.Sous_Classe_Therapeutique)">
+            x-show="result.Classe_Therapeutique || result.Sous_Classe_Therapeutique"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.Classe_Therapeutique || result.Sous_Classe_Therapeutique)">
             <template x-if="result.Classe_Therapeutique">
               <div class="field-container field-classe-therapeutique">
                 <strong class="prop-label prop-label-classe-therapeutique">Classe Thérapeutique:</strong>
@@ -276,8 +276,8 @@
           <!-- Indications -->
           <template x-if="result.Indications">
             <div class="details-section field-indications"
-                 :class="{'last-visible-section': isLastVisibleSection($el)}"
-                 x-effect="if(open) updateVisibilityStatus($el, true)">
+              :class="{'last-visible-section': isLastVisibleSection($el)}"
+              x-effect="if(open) updateVisibilityStatus($el, true)">
               <strong class="prop-label prop-label-indications">Indications:</strong>
               <span class="prop-value prop-value-indications" x-text="result.Indications"></span>
             </div>
@@ -285,9 +285,9 @@
 
           <!-- Links -->
           <div class="details-section field-links"
-               x-show="result.RCP_Link || result.Notice_Link"
-               :class="{'last-visible-section': isLastVisibleSection($el)}"
-               x-effect="if(open) updateVisibilityStatus($el, result.RCP_Link || result.Notice_Link)">
+            x-show="result.RCP_Link || result.Notice_Link"
+            :class="{'last-visible-section': isLastVisibleSection($el)}"
+            x-effect="if(open) updateVisibilityStatus($el, result.RCP_Link || result.Notice_Link)">
             <strong class="prop-label prop-label-links">Liens:</strong>
             <template x-if="result.RCP_Link">
               <a class="prop-value prop-value-rcp-link" :href="result.RCP_Link" target="_blank" rel="noopener noreferrer">RCP</a>
@@ -335,9 +335,9 @@ function medicamentSearchApp() {
     searchPerformed: false,
     searchInProgress: false,
     activeFilter: 'all',
-    dbPath: '/assets/db/medicaments_fts.db',
+    dbPath: '/assets/db/medicaments_fts.db?v=5',
     ftsTableName: 'medicaments_fts',
-    
+
     // Add new properties for autocomplete
     showAutocomplete: false,
     autocompleteResults: [],
@@ -533,18 +533,18 @@ function medicamentSearchApp() {
         await new Promise(resolve => setTimeout(resolve, 10));
 
         const query = `
-          SELECT
-              rowid,
-              CODE_PCT, Nom_Commercial, Dosage, DCI, AMM, Laboratoire,
-              PRIX_PUBLIC, TARIF_REFERENCE, CATEGORIE, AP,
-              Indications, Classe_Therapeutique, Sous_Classe_Therapeutique,
-              Forme, Presentation, Date_AMM, VEIC, Tableau,
-              Duree_Conservation, Conditionnement_Primaire, Specification_Conditionnement,
-              RCP_Link, Notice_Link
-          FROM "${this.ftsTableName}"
-          WHERE "${this.ftsTableName}" MATCH ?
-          ORDER BY rank
-        `;
+SELECT
+rowid,
+CODE_PCT, Nom_Commercial, Dosage, DCI, AMM, Laboratoire,
+PRIX_PUBLIC, TARIF_REFERENCE, CATEGORIE, AP,
+Indications, Classe_Therapeutique, Sous_Classe_Therapeutique,
+Forme, Presentation, Date_AMM, VEIC, Tableau,
+Duree_Conservation, Conditionnement_Primaire, Specification_Conditionnement,
+RCP_Link, Notice_Link
+FROM "${this.ftsTableName}"
+WHERE "${this.ftsTableName}" MATCH ?
+ORDER BY rank
+`;
 
         const stmt = this.db.prepare(query);
         stmt.bind([ftsQueryTerm]);
@@ -584,7 +584,7 @@ function medicamentSearchApp() {
         this.searchError = null;
       }
     },
-    
+
     // New autocomplete methods
     async fetchAutocompleteResults() {
       if (!this.dbLoaded || !this.db || !this.searchTerm.trim()) {
@@ -592,50 +592,50 @@ function medicamentSearchApp() {
         this.showAutocomplete = false;
         return;
       }
-      
+
       this.autocompleteLoading = true;
       const term = this.searchTerm.trim();
-      
+
       try {
         // Shorter formatted term for autocomplete to get broader results
         const ftsQueryTerm = term
-          .split(/\s+/)
-          .filter(part => part.length > 0)
-          .map(part => part.replace(/[^a-zA-Z0-9\u00C0-\u017F]/g, ' ').trim())
-          .filter(part => part.length > 0)
-          .map(part => part + '*')
-          .join(' ');
-          
+        .split(/\s+/)
+        .filter(part => part.length > 0)
+        .map(part => part.replace(/[^a-zA-Z0-9\u00C0-\u017F]/g, ' ').trim())
+        .filter(part => part.length > 0)
+        .map(part => part + '*')
+        .join(' ');
+
         if (!ftsQueryTerm) {
           this.autocompleteResults = [];
           this.showAutocomplete = false;
           this.autocompleteLoading = false;
           return;
         }
-        
+
         const query = `
-          SELECT DISTINCT Nom_Commercial, DCI
-          FROM "${this.ftsTableName}"
-          WHERE "${this.ftsTableName}" MATCH ?
-          ORDER BY rank
-          LIMIT 10
-        `;
-        
+SELECT DISTINCT Nom_Commercial, DCI
+FROM "${this.ftsTableName}"
+WHERE "${this.ftsTableName}" MATCH ?
+ORDER BY rank
+LIMIT 10
+`;
+
         const stmt = this.db.prepare(query);
         stmt.bind([ftsQueryTerm]);
-        
+
         const results = [];
         while (stmt.step()) {
           const row = stmt.getAsObject();
           const suggestion = {
             text: row.Nom_Commercial + (row.DCI ? ' (' + row.DCI + ')' : ''),
             html: this.highlightMatch(row.Nom_Commercial, term) + 
-                 (row.DCI ? ' (' + this.highlightMatch(row.DCI, term) + ')' : '')
+              (row.DCI ? ' (' + this.highlightMatch(row.DCI, term) + ')' : '')
           };
           results.push(suggestion);
         }
         stmt.free();
-        
+
         this.autocompleteResults = results;
         this.showAutocomplete = results.length > 0;
       } catch (err) {
@@ -646,15 +646,15 @@ function medicamentSearchApp() {
         this.autocompleteLoading = false;
       }
     },
-    
+
     highlightMatch(text, term) {
       if (!text) return '';
-      
+
       // Simple highlighting - case insensitive
       const regex = new RegExp('(' + term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
       return text.replace(regex, '<strong class="highlight">$1</strong>');
     },
-    
+
     selectAutocompleteItem(index) {
       if (index >= 0 && index < this.autocompleteResults.length) {
         this.searchTerm = this.autocompleteResults[index].text;
@@ -662,10 +662,10 @@ function medicamentSearchApp() {
         this.performSearch();
       }
     },
-    
+
     handleAutocompleteKeydown(event) {
       if (!this.showAutocomplete) return;
-      
+
       // Down arrow
       if (event.key === 'ArrowDown') {
         event.preventDefault();
@@ -692,17 +692,17 @@ function medicamentSearchApp() {
         this.closeAutocomplete();
       }
     },
-    
+
     closeAutocomplete() {
       this.showAutocomplete = false;
       this.selectedAutocompleteIndex = -1;
     },
-    
+
     // Modified input event handler
     handleSearchInput() {
       this.searchPerformed = false;
       this.searchResults = [];
-      
+
       // Debounce autocomplete requests
       clearTimeout(this.autocompleteTimeout);
       this.autocompleteTimeout = setTimeout(() => {
@@ -797,8 +797,8 @@ h1, h2 {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
 }
 
 /* Search UI */

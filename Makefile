@@ -15,12 +15,12 @@ bump:
 # 	@./sync.sh
 
 dl_analytics:
-	@echo "Downloading analytics.sqlite from FTP server..."
-	@./sync.sh download_analytics
+	@echo "Downloading analytics.sqlite from VPS..."
+	@rsync -avz iheb@ssh.iheb.tn:/var/www/iheb.tn/analytics.sqlite ./analytics.sqlite
 
 sync:
 	@echo "Syncing with remote server..."
-	@rsync -av --exclude-from='.rsyncignore' ./ iheb@ssh.iheb.tn:/var/www/iheb.tn/
+	@rsync -av --exclude-from='.rsyncignore' ./ iheb@ssh.iheb.tn:/var/www/iheb.tn/ --rsync-path="sudo rsync" --chown=www-data:www-data 
 
 # commit:
 # 	@echo "Uploading to prod..."

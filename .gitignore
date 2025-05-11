@@ -3,7 +3,6 @@ tests/
 *.db
 sync.sh
 config.php
-todo.md
 *.sqlite
 public/assets/casfm-pages/*
 analytics.sqlite*

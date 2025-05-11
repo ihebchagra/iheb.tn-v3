@@ -5,3 +5,4 @@ todo.md
 php.ini
 .ht*
 .git/
+*.sqlite

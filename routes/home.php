@@ -1,10 +1,10 @@
 <div style="display: none;" href='/' id="metadata">Iheb Chagra</div>
 <div>
-    <h1>Iheb Chagra</h1>
-    <div x-data="typewriter()" class="typewriter-container">
-        <span x-text="displayText" class="typed-text"></span>
-        <span class="cursor">⎸</span>
-    </div>
+  <h1>Iheb Chagra</h1>
+  <div x-data="typewriter()" class="typewriter-container">
+    <span x-text="displayText" class="typed-text"></span>
+    <span class="cursor">⎸</span>
+  </div>
 </div>
 <h2>À Propos</h2>
 <p><span x-init x-text="getGreeting()">Bonjour</span>! Je suis <b>Iheb Chagra</b>, médecin résident en microbiologie. Bienvenue sur mon site web personnel. Il contient plusieurs outils pour la pratique médicale. J'espère qu'il vous sera utile.</p>
@@ -40,111 +40,111 @@
 <h2>Contactez-moi</h2>
 <p>Je suis disponible pour discuter n'importe quel sujet.</p>
 <ul>
-    <li>E-mail : <a href="mailto:ihebchagra@gmail.com">ihebchagra@gmail.com</a></li>
-    <li>Github : <a href="https://github.com/ihebchagra">@ihebchagra</a></li>
-    <li>Facebook : <a href="https://www.facebook.com/iheb.chagra">Iheb Chagra</a></li>
-    <li>Instagram : <a href="https://www.instagram.com/ihebchagra">@ihebchagra</a></li>
+  <li>E-mail : <a href="mailto:ihebchagra@gmail.com">ihebchagra@gmail.com</a></li>
+  <li>Github : <a href="https://github.com/ihebchagra">@ihebchagra</a></li>
+  <li>Facebook : <a href="https://www.facebook.com/iheb.chagra">Iheb Chagra</a></li>
+  <li>Instagram : <a href="https://www.instagram.com/ihebchagra">@ihebchagra</a></li>
 </ul>
 
 
 
 <script>
 function getGreeting() {
-    const currentHour = new Date().getHours();
+  const currentHour = new Date().getHours();
 
-    if (currentHour >= 18 || currentHour < 5) {
-        return 'Bonsoir';
-    } else {
-        return 'Bonjour';
-    }
+  if (currentHour >= 18 || currentHour < 5) {
+    return 'Bonsoir';
+  } else {
+    return 'Bonjour';
+  }
 }
 
 function typewriter() {
-    return {
-        jobs: [
-            "Médecin résident en microbiologie",
-            "Programmeur du dimanche",
-            "Responsable web/app @ AMENA",
-        ],
-        displayText: '',
-        currentJob: 0,
-        charIndex: 0,
-        isDeleting: false,
-        typeDelay: 100,
-        deleteDelay: 50,
-        pauseDelay: 1500,
+  return {
+    jobs: [
+      "Médecin résident en microbiologie",
+      "Programmeur du dimanche",
+      "Responsable web/app @ AMENA",
+    ],
+    displayText: '',
+    currentJob: 0,
+    charIndex: 0,
+    isDeleting: false,
+    typeDelay: 100,
+    deleteDelay: 50,
+    pauseDelay: 1500,
 
-        init() {
+    init() {
+      this.typeNextChar();
+    },
+
+    typeNextChar() {
+      const currentText = this.jobs[this.currentJob];
+
+      if (!this.isDeleting) {
+        // Typing
+        this.displayText = currentText.substring(0, this.charIndex + 1);
+        this.charIndex++;
+
+        // If completed typing
+        if (this.charIndex >= currentText.length) {
+          this.isDeleting = false;
+          // Wait before starting to delete
+          setTimeout(() => {
+            this.isDeleting = true;
             this.typeNextChar();
-        },
-
-        typeNextChar() {
-            const currentText = this.jobs[this.currentJob];
-
-            if (!this.isDeleting) {
-                // Typing
-                this.displayText = currentText.substring(0, this.charIndex + 1);
-                this.charIndex++;
-
-                // If completed typing
-                if (this.charIndex >= currentText.length) {
-                    this.isDeleting = false;
-                    // Wait before starting to delete
-                    setTimeout(() => {
-                        this.isDeleting = true;
-                        this.typeNextChar();
-                    }, this.pauseDelay);
-                    return;
-                }
-            } else {
-                // Deleting
-                this.displayText = currentText.substring(0, this.charIndex - 1);
-                this.charIndex--;
-
-                // If completed deleting
-                if (this.charIndex <= 0) {
-                    this.isDeleting = false;
-                    this.currentJob = (this.currentJob + 1) % this.jobs.length;
-                }
-            }
-            const delay = this.isDeleting ? this.deleteDelay : this.typeDelay;
-            setTimeout(() => this.typeNextChar(), delay);
+          }, this.pauseDelay);
+          return;
         }
+      } else {
+        // Deleting
+        this.displayText = currentText.substring(0, this.charIndex - 1);
+        this.charIndex--;
+
+        // If completed deleting
+        if (this.charIndex <= 0) {
+          this.isDeleting = false;
+          this.currentJob = (this.currentJob + 1) % this.jobs.length;
+        }
+      }
+      const delay = this.isDeleting ? this.deleteDelay : this.typeDelay;
+      setTimeout(() => this.typeNextChar(), delay);
     }
+  }
 }
 </script>
 
 <style>
-    .typewriter-container {
-        font-size: 1em;
-        color: var(--fg1);
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        height: 1.5em;
-        margin-bottom: 1em;
-        font-size: 1.3rem;
-    }
+.typewriter-container {
+  font-size: 1em;
+  color: var(--fg1);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  height: 1.5em;
+  margin-bottom: 1em;
+  font-size: 1.3rem;
+}
 
-    .cursor {
-        display: inline-block;
-        animation: blink-cursor 0.8s step-end infinite;
-        color: var(--orange);
-    }
+.cursor {
+  display: inline-block;
+  animation: blink-cursor 0.8s step-end infinite;
+  color: var(--orange);
+}
 
-    @keyframes blink-cursor {
+@keyframes blink-cursor {
 
-        from,
-        to {
-            opacity: 1;
-        }
+from,
+to {
+  opacity: 1;
+}
 
-        50% {
-            opacity: 0;
-        }
-    }
+50% {
+  opacity: 0;
+}
+}
 
-    .deprecated {
-        color: var(--aqua);
-    }
+.deprecated {
+  color: var(--aqua);
+}
 </style>
