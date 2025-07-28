@@ -25,25 +25,25 @@
       "negClass": "gray"
     },
     {
-      "key": "BGUR",
+      "key": "ßGUR",
       "label": "β-Glucuronidase",
       "posClass": "green",
       "negClass": "gray"
     },
     {
-      "key": "BGAL",
+      "key": "ßGAL",
       "label": "β-Galactosidase",
       "posClass": "red",
       "negClass": "gray"
     },
     {
-      "key": "aGLU",
+      "key": "αGLU",
       "label": "α-Glucosidase",
       "posClass": "orange",
       "negClass": "gray"
     },
     {
-      "key": "BNAG",
+      "key": "ßNAG",
       "label": "N-Acetyl-β-Glucosaminidase",
       "posClass": "red",
       "negClass": "gray"

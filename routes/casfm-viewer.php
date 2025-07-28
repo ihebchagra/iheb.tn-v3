@@ -10,14 +10,14 @@
       //width : (i >= 42 && i <= 132) || (i >= 137 && i <= 147) || (i >= 165 && i <= 177) ? 2339 : 1654,
       //height : (i >= 42 && i <= 132) || (i >= 137 && i <= 147) || (i >= 165 && i <= 177) ? 1654 : 2339,
       global $pages;
-      foreach (range(1, 177) as $page) {
-        $width = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($page >= 165 && $page <= 177) ? 2339 : 1654;
-        $height = ($page >= 42 && $page <= 132) || ($page >= 137 && $page <= 147) || ($page >= 165 && $page <= 177) ? 1654 : 2339;
+      foreach (range(1, 172) as $page) {
+        $width = ($page >= 41 && $page <= 125) || ($page >= 130 && $page <= 138) || ($page >= 159 && $page <= 172) ? 2339 : 1654;
+        $height = ($page >= 41 && $page <= 125) || ($page >= 130 && $page <= 138) || ($page >= 159 && $page <= 172) ? 1654 : 2339;
         // first image has 3 rem margin-top
         if ($page == 1) {
-          echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto; margin-top: 3rem;'>";
+          echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp?v=2' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto; margin-top: 3rem;'>";
         } else {
-          echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto;'>";
+          echo "<img id='{$page}' data-src='/assets/casfm-pages/page_{$page}.webp?v=2' alt='' width='{$width}' height='{$height}' style='max-width: 100%; height: auto;'>";
         }
       ?>
       <?php

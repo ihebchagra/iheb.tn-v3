@@ -16,11 +16,11 @@ bump:
 
 dl_analytics:
 	@echo "Downloading analytics.sqlite from VPS..."
-	@rsync -avz iheb@ssh.iheb.tn:/var/www/iheb.tn/analytics.sqlite ./analytics.sqlite
+	@rsync -avz iheb@iheb.tn:/var/www/iheb.tn/analytics.sqlite ./analytics.sqlite --rsync-path="sudo rsync" --chown=www-data:www-data
 
 sync:
 	@echo "Syncing with remote server..."
-	@rsync -av --exclude-from='.rsyncignore' ./ iheb@ssh.iheb.tn:/var/www/iheb.tn/ --rsync-path="sudo rsync" --chown=www-data:www-data 
+	@rsync -av --exclude-from='.rsyncignore' ./ iheb@iheb.tn:/var/www/iheb.tn/ --rsync-path="sudo rsync" --chown=www-data:www-data 
 
 # commit:
 # 	@echo "Uploading to prod..."

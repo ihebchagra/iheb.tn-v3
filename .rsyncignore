@@ -6,3 +6,4 @@ php.ini
 .ht*
 .git/
 *.sqlite
+node_modules

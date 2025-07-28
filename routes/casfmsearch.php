@@ -136,7 +136,7 @@
       tocData: [], // To hold Table of Contents data from DB
 
       // Configuration
-      dbPath: "/assets/db/casfm_fts5.db", // Mettez à jour le chemin si nécessaire
+      dbPath: "/assets/db/casfm_fts5.db?v=3", // Mettez à jour le chemin si nécessaire
       ftsTableName: "pdf_content",
 
       // Methods

@@ -48,20 +48,20 @@ header('Pragma: no-cache');
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <link rel="manifest" href="/assets/pwa/site.webmanifest?v=23">
+  <link rel="manifest" href="/assets/pwa/site.webmanifest?v=28">
   <link rel="favicon" href="/assets/pwa/favicon.ico?v=8" type="image/x-icon">
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <!-- Local Deps -->
-  <link rel="stylesheet" href="/styles.css?v=867">
+  <link rel="stylesheet" href="/styles.css?v=870">
   <script src="/assets/wasm/sql-wasm.js"></script>
   <?= $headerjs ?>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=77')
+        navigator.serviceWorker.register('/sw.js?v=78')
           .then((registration) => {})
           .catch((registrationError) => {});
       });
@@ -73,12 +73,12 @@ header('Pragma: no-cache');
   <link ref="prefetch" href='/assets/db/api20e.json?v=12'>
   <link ref="prefetch" href='/assets/db/api20ne.json?v=12'>
   <link ref="prefetch" href='/assets/db/apistrep.json?v=14'>
-  <link ref="prefetch" href='/assets/db/apicoryne.json?v=15'>
+  <link ref="prefetch" href='/assets/db/apicoryne.json?v=16'>
   <link ref="prefetch" href='/assets/db/apinh.json?v=14'>
   <link ref="prefetch" href='/assets/db/apistaph.json?v=14'>
   <link ref="prefetch" href='/assets/db/id32c.json?v=10'>
   <link rel="prefetch" href="/assets/db/medicaments_fts.db?v=5">
-  <link rel="prefetch" href="/assets/db/casfm_fts5.db">
+  <link rel="prefetch" href="/assets/db/casfm_fts5.db?v=3">
   <link rel="prefetch" href="/assets/db/prelevements.db">
 </head>
 

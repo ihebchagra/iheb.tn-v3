@@ -7,3 +7,4 @@ config.php
 public/assets/casfm-pages/*
 analytics.sqlite*
 php.ini
+node_modules

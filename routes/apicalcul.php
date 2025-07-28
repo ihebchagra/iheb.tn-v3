@@ -173,7 +173,7 @@
         else if (key === 'api20e') url = '/assets/db/api20e.json?v=12';
         else if (key === 'api20ne') url = '/assets/db/api20ne.json?v=12';
         else if (key === 'apistrep') url = '/assets/db/apistrep.json?v=14';
-        else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=15';
+        else if (key === 'apicoryne') url = '/assets/db/apicoryne.json?v=16';
         else if (key === 'apinh') url = '/assets/db/apinh.json?v=14';
         else if (key === 'apistaph') url = '/assets/db/apistaph.json?v=14';
         else if (key === 'id32c') url = '/assets/db/id32c.json?v=10';

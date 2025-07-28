@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-$get_routes = ['home', 'offline', 'ecn', 'ecn/polysearch', 'ecn/seriesearch', 'ecn/ecn3altayer', 'medicasearch',  'apicalcul', 'casfmsearch', 'casfm-viewer', 'prelevements'];
+$get_routes = ['home', 'offline', 'ecn', 'ecn/polysearch', 'ecn/seriesearch', 'ecn/ecn3altayer', 'medicasearch',  'apicalcul', 'casfmsearch', 'casfm-viewer', 'prelevements', 'apiprofil', 'countercell'];
 $post_routes = ['view', 'apicalcul_analytics'];
 
 $request_method = $_SERVER['REQUEST_METHOD'];
@@ -17,7 +17,7 @@ $route = $requested_route;
 
 // Backwards compatibility for v2 routes : we will just redirect to the new routes / websites
 if ($requested_route === 'donate') {
-  header('Location: https://ba9chich.com/fr/ihebchagra');
+  header('Location: https://gateway.konnect.network/me/ihebchagra');
   exit();
 }
 if (substr($requested_route, 0, 3) === 'ecn') {

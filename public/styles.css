@@ -485,7 +485,7 @@ header > .dark-toggle {
 
 /* Light theme icon (visible by default) */
 .dark-toggle::before {
-  content: "🌝";
+  content: "☀️";
   position: absolute;
   opacity: 1;
   transition: opacity 0.15s ease;
@@ -493,7 +493,7 @@ header > .dark-toggle {
 
 /* Dark theme icon (hidden by default) */
 .dark-toggle::after {
-  content: "🌚";
+  content: "🌑";
   position: absolute;
   opacity: 0;
   transition: opacity 0.15s ease;

@@ -460,5 +460,25 @@
   "lang": "fr",
   "dir": "ltr",
   "scope": "https://iheb.tn",
-  "categories": ["education", "medical"]
+  "categories": ["education", "medical"],
+  "shortcuts": [
+    {
+      "name": "CA-SFM Search",
+      "short_name": "CA-SFM",
+      "description": "Rechercher dans les recommandations du CA-SFM",
+      "url": "/casfmsearch",
+      "icons": [
+        { "src": "/assets/pwa/android/android-launchericon-96-96.png", "sizes": "96x96" }
+      ]
+    },
+    {
+      "name": "CounterCell",
+      "short_name": "CounterCell",
+      "description": "Compteur de cellules (formule leucocytaire)",
+      "url": "/countercell",
+      "icons": [
+        { "src": "/assets/pwa/android/android-launchericon-96-96.png", "sizes": "96x96" }
+      ]
+    }
+  ]
 }
