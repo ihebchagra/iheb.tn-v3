@@ -54,6 +54,7 @@ header('Pragma: no-cache');
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
   <!-- Local Deps -->
   <link rel="stylesheet" href="/styles.css?v=870">
   <script src="/assets/wasm/sql-wasm.js"></script>
